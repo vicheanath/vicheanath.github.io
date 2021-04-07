@@ -59,7 +59,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
+        name: `Vichea (UX/UI Designer)`,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#000`,
@@ -71,7 +71,8 @@ module.exports = {
     {
       resolve: `gatsby-source-github-api`,
       options: {
-        token: process.env.GATSBY_GITHUB_API_TOKEN,
+        // token: process.env.GATSBY_GITHUB_API_TOKEN,
+        token: '03eecb2f08decec799b96656bdbb494fc15c90c8',
         graphQLQuery: data.githubApiQuery,
         variables: data.githubApiVariables,
       },

@@ -8,7 +8,7 @@ export const Intro = styled.div`
 export const Title = styled.h1`
   font-size: 2rem;
   text-transform: capitalize;
-  font-family: "GT-Walsheim-Pro-Bold";
+  font-family: "HelveticaWorld-Bold";
 `
 
 export const ArticlePost = styled.article`
@@ -24,7 +24,7 @@ export const ArticlePost = styled.article`
 export const SmallText = styled.small`
   font-size: 0.89rem;
   padding-right: 10px;
-  font-family: "GT-Walsheim-Pro-Regular";
+  font-family:"HelveticaWorld-Bold", "Hanuman-Regular";
   > span {
     padding-left: 5px;
   }
@@ -33,7 +33,7 @@ export const ArticleBody = styled.div`
   margin-top: 5rem;
   p {
     font-size: 1.5rem;
-    font-family: "GT-Walsheim-Pro-Medium";
+    font-family: "HelveticaWorld-Bold", "Hanuman-Regular";
   }
 `
 
@@ -54,6 +54,6 @@ export const NaviagtionLi = styled.li`
   }
   a {
     font-size: 1.3rem;
-    font-family: "GT-Walsheim-Pro-Medium";
+    font-family: "HelveticaWorld-Bold", "Hanuman-Regular";
   }
 `

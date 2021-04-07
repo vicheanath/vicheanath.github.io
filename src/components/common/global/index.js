@@ -16,8 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-text-size-adjust: 100%; /* 2 */
     body {
       font-size: 14px;
-      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
-      font-family: 'Hanuman-Regular', 'Hanuman-Regular',sans-serif;
+      font-family: 'HelveticaWorld-Bold', 'Hanuman-Regular';
       margin: 0;
     }
     main {
@@ -39,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
     b,
     strong {
       font-weight: bolder;
-      font-family: 'GT-Walsheim-Pro-Bold', 'Hanuman-Bold';
+      font-family: 'HelveticaWorld-Bold', 'Hanuman-Bold';
     }
     small {
       font-size: 80%;

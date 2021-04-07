@@ -1,21 +1,21 @@
 @font-face {
-  font-family: 'GT-Walsheim-Pro-Regular';
-  src: url('../../../assets/fonts/GT-Walsheim-Pro-Regular.woff2') format('woff2'); /* Super Modern Browsers */
+  font-family: '';
+  src: url('../../../assets/fonts/HelveticaWorld-Bold.ttf'); /* Super Modern Browsers */
 }
 @font-face {
-  font-family: 'GT-Walsheim-Pro-Medium';
-  src: url('../../../assets/fonts/GT-Walsheim-Pro-Medium.woff2') format('woff2'); /* Super Modern Browsers */
+  font-family: 'HelveticaWorld-Bold';
+  src: url('../../../assets/fonts/HelveticaWorld-Bold.ttf'); /* Super Modern Browsers */
 }
 @font-face {
-  font-family: 'GT-Walsheim-Pro-Bold';
-  src: url('../../../assets/fonts/GT-Walsheim-Pro-Bold.woff2') format('woff2'); /* Super Modern Browsers */
+  font-family: 'HelveticaWorld-BoldItalic';
+  src: url('../../../assets/fonts/HelveticaWorld-BoldItalic.ttf'); /* Super Modern Browsers */
 }
 
 @font-face {
   font-family: 'Hanuman-Bold';
-  src: url('./../../../assets/fonts/Hanuman-Bold.ttf') format('ttf');
+  src: url('../../../assets/fonts/Hanuman-Bold.ttf');
 }
 @font-face {
   font-family: 'Hanuman-Regular';
-  src: url('./../../../assets/fonts/Hanuman-Regular.ttf') format('ttf');
+  src: url('../../../assets/fonts/Hanuman-Regular.ttf');
 }
