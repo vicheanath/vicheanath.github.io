@@ -12,10 +12,10 @@ const Router = ({dimensions}) => {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home dimensions={dimensions} />} />
-        {/* <Route path="/case-studies" element={<CaseStudies />} />
+        <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/approach" element={<Approach />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/about-us" element={<About />} /> */}
+        <Route path="/about-us" element={<About />} />
       </Route>
     </Routes>
   );
