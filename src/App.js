@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
 import { gsap } from "gsap";
 import "./styles/App.scss";
 import Navigation from "./components/navigation";
