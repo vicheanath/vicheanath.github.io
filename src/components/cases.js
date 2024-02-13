@@ -2,17 +2,17 @@ import React from "react";
 import { ReactComponent as CasesNext } from "../assets/arrow-right.svg";
 import { ReactComponent as CasesPrev } from "../assets/arrow-left.svg";
 
-const caseStudies = [
+const projects = [
   {
     id: 1,
-    subtitle: "Curology",
-    title: "A custom formula for your skin’s unique needs",
+    subtitle: "Mini Property Management System",
+    title: "Property management system website using React js and Spring.",
     img: "curology-min"
   },
   {
     id: 2,
-    subtitle: "Yourspace",
-    title: "Open space floor plans for you next venture",
+    subtitle: "Chuon Nath Khmer dictionary", 
+    title: "The Chuon Nath Khmer Dictionary is a Khmer-Khmer dictionary that was created by Samdech Sangha Raj Jhotañano Chuon Nath (1883-1969)",
     img: "yourspace-min"
   },
   {
@@ -36,7 +36,7 @@ const Cases = () => {
           </div>
         </div>
         <div className='row'>
-          {caseStudies.map(caseItem => (
+          {projects.map(caseItem => (
             <div className='case' key={caseItem.id}>
               <div className='case-details'>
                 <span>{caseItem.subtitle}</span>

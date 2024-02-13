@@ -41,6 +41,17 @@
       width: 256px;
       position: relative;
       z-index: 2;
+
+      .wrapper-btn{
+        display: flex;
+        align-items: center;
+      }
+      .hover-rotate:hover {
+        svg {
+          transform: rotate(-45deg);
+        }
+      }
+
       a {
         font-size: 1.6rem;
         color: $black;

@@ -5,6 +5,7 @@
 @import "./components/banner.scss";
 @import "./components/cases.scss";
 @import "./components/navigation.scss";
+@import "./components/cursor.scss";
 
 body,
 html {
@@ -18,8 +19,8 @@ html {
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
 }
-
 .container {
   width: 1560px;
   min-width: 1560px;

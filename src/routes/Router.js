@@ -7,11 +7,11 @@ import Layout from "../components/Layout";
 import Home from "../pages/home";
 import CaseStudies from "../pages/caseStudies";
 
-const Router = ({dimensions}) => {
+const Router = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Home dimensions={dimensions} />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/approach" element={<Approach />} />
         <Route path="/services" element={<Services />} />
