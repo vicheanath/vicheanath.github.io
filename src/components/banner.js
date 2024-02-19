@@ -4,15 +4,17 @@ import { ReactComponent as Github } from "../assets/github.svg";
 import { ReactComponent as LinkedIn } from "../assets/linkedin.svg";
 import { ReactComponent as Instagram } from "../assets/instagram.svg";
 import { Link } from "react-router-dom";
-import Profile from "./Profile";
 
 const Banner = () => {
   return (
     <section className="main">
       <div className="container">
         <div className="row">
-          <h2 className="main-title hover-display-image" data-image={require("../assets/profile.jpeg")}>
-            <div className="line"> 
+          <h2
+            className="main-title hover-display-image"
+            data-image={require("../assets/profile.jpeg")}
+          >
+            <div className="line">
               <span>Vichea Nath</span>
             </div>
             <div className="line">

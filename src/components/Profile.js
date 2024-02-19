@@ -43,9 +43,6 @@ const Profile = () => {
       ease: "back.out(1.7)",
     });
 
-   
-
-    
     window.addEventListener("mousemove", onFirstMove);
 
     function onFirstMove(e) {
@@ -69,7 +66,6 @@ const Profile = () => {
       "--y": window.innerHeight / 2,
     });
     tl.progress(0.2);
-    
   }, []);
   return (
     <div className="profile hidden-content">
