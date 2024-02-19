@@ -9,8 +9,6 @@ import { useDimensions } from "../hooks/useDimensions";
 const Header = ({ dimensions }) => {
   const [menuState, setMenuState] = useState({ menuOpened: false });
   const { width, height } = useDimensions();
-
-  console.log(width, height);
   useEffect(() => {
     if (menuState.menuOpened) {
       openMenu(width);
@@ -31,7 +29,7 @@ const Header = ({ dimensions }) => {
           <div className="nav-toggle">
             <div
               onClick={() => setMenuState({ menuOpened: true })}
-              className="hamburger-menu"
+              className="hamburger-menu link"
             >
               <span></span>
               <span></span>

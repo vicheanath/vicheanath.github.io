@@ -27,14 +27,6 @@ const Cases = () => {
   return (
     <section className='cases'>
       <div className='container-fluid'>
-        <div className='cases-navigation'>
-          <div className='cases-arrow prev disabled'>
-            <CasesPrev />
-          </div>
-          <div className='cases-arrow next'>
-            <CasesNext />
-          </div>
-        </div>
         <div className='row'>
           {projects.map(caseItem => (
             <div className='case' key={caseItem.id}>

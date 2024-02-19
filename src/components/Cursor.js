@@ -1,27 +1,65 @@
-import React, { forwardRef, useRef, useImperativeHandle } from "react";
+import React, { useEffect } from "react";
 import { gsap } from "gsap";
-const styles = {
-  position: "absolute",
-  top: "-1000px",
-  left: "-1000px",
-};
 
-const Cursor = forwardRef((props, ref) => {
-  const { className, width, height, children } = props;
-  const container = useRef(null);
-  useImperativeHandle(ref, () => ({
-    moveTo(x, y) {
-      gsap.to(container.current, {
-        x: x - width * 0.5,
-        y: y - height * 0.5,
+const Cursor = () => {
+  useEffect(() => {
+    let cursor = document.querySelector(".cursor");
+    const cursorMove = (e) => {
+      let x = e.clientX;
+      let y = e.clientY;
+
+      // add gsap
+      
+      gsap.to(cursor, { top: y, left: x, duration: 0.5, ease: "power4.out" });
+    };
+
+    document.addEventListener("mousemove", cursorMove);
+
+    const cursorHover = (e) => {
+      cursor.classList.add("active");
+    };
+
+    const cursorUnhover = (e) => {
+      cursor.classList.remove("active");
+    };
+
+    const cursorClick = () => {
+      cursor.classList.add("click");
+
+      setTimeout(() => {
+        cursor.classList.remove("click");
+      }, 500);
+    };
+
+    const linksElement = ["a", "button", ".link", ".hover-target"]
+
+    const links = document.querySelectorAll(linksElement.join(", "));
+
+    links.forEach((link) => {
+      link.addEventListener("mouseover", () => {
+        cursor.classList.add("hovered");
       });
-    },
-  }));
+      link.addEventListener("mouseleave", () => {
+        cursor.classList.remove("hovered");
+      });
+    });
+
+    document.addEventListener("mouseover", cursorHover);
+    document.addEventListener("mouseout", cursorUnhover);
+    document.addEventListener("click", cursorClick);
+
+    return () => {
+      document.removeEventListener("mouseover", cursorHover);
+      document.removeEventListener("mouseout", cursorUnhover);
+      document.removeEventListener("click", cursorClick);
+    };
+  }, []);
+
   return (
-    <div style={styles} ref={container} className={className}>
-      {children}
+    <div className="wrap-cursor">
+      <div className="cursor"></div>
     </div>
   );
-});
+};
 
 export default Cursor;
