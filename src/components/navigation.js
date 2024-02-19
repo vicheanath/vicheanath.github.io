@@ -29,12 +29,12 @@ const Navigation = () => {
               <ul className="nav-info">
                 <li className="nav-info-label">Email</li>
                 <li>
-                  <Link to="/contact" exact>
+                  <Link to="/contact">
                     Get in touch with us
                   </Link>
                 </li>
                 <li>
-                  <Link to="/audit" exact>
+                  <Link to="/audit">
                     Get a free audit
                   </Link>
                 </li>

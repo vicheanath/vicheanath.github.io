@@ -7,9 +7,6 @@ const Cursor = () => {
     const cursorMove = (e) => {
       let x = e.clientX;
       let y = e.clientY;
-
-      // add gsap
-
       gsap.to(cursor, { top: y, left: x, duration: 0.5, ease: "power4.out" });
     };
 
@@ -31,7 +28,7 @@ const Cursor = () => {
       }, 500);
     };
 
-    const linksElement = ["a", "button", ".link", ".hover-target"];
+    const linksElement = ["a", "button", ".link"];
 
     const links = document.querySelectorAll(linksElement.join(", "));
 
@@ -41,6 +38,20 @@ const Cursor = () => {
       });
       link.addEventListener("mouseleave", () => {
         cursor.classList.remove("hovered");
+      });
+    });
+
+    const hoverDisplayImage = document.querySelectorAll(".hover-display-image");
+
+    hoverDisplayImage.forEach((image) => {
+      const imageURL = image.dataset.image;
+      image.addEventListener("mouseover", () => {
+        cursor.classList.add("hovered-image");
+        gsap.to(cursor, { backgroundImage: `url(${imageURL})` });
+      });
+      image.addEventListener("mouseleave", () => {
+        cursor.classList.remove("hovered-image");
+        gsap.to(cursor, { backgroundImage: "none" });
       });
     });
 
