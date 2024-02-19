@@ -6,9 +6,9 @@ import { useDimensions } from "../hooks/useDimensions";
 
 // Define reducer
 
-const Header = ({ dimensions }) => {
+const Header = () => {
   const [menuState, setMenuState] = useState({ menuOpened: false });
-  const { width, height } = useDimensions();
+  const { width } = useDimensions();
   useEffect(() => {
     if (menuState.menuOpened) {
       openMenu(width);
@@ -22,9 +22,7 @@ const Header = ({ dimensions }) => {
       <div className="container">
         <div className="row v-center space-between">
           <div className="logo">
-            <Link to="/">
-              Vichea Nath
-            </Link>
+            <Link to="/">Vichea Nath</Link>
           </div>
           <div className="nav-toggle">
             <div

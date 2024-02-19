@@ -9,7 +9,7 @@ const Cursor = () => {
       let y = e.clientY;
 
       // add gsap
-      
+
       gsap.to(cursor, { top: y, left: x, duration: 0.5, ease: "power4.out" });
     };
 
@@ -31,7 +31,7 @@ const Cursor = () => {
       }, 500);
     };
 
-    const linksElement = ["a", "button", ".link", ".hover-target"]
+    const linksElement = ["a", "button", ".link", ".hover-target"];
 
     const links = document.querySelectorAll(linksElement.join(", "));
 

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Banner from "../components/banner";
-import Cases from "../components/cases";
 import gsap from "gsap";
 
 let tl = gsap.timeline({ defaults: { duration: 1 } });
@@ -13,8 +12,8 @@ const homeAnimation = () => {
     skewY: 7,
     stagger: {
       amount: 0.3,
-    }
-  })
+    },
+  });
 };
 
 const Home = () => {

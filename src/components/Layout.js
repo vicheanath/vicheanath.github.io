@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <div className='App'>
+      <div className="App">
         <Outlet />
       </div>
     </>

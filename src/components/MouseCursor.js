@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 // because we can skip calling `element.getBoundingClientRect()`
 const WIDTH = 40;
 const HEIGHT = 40;
- 
+
 export const MouseCursor = () => {
   const ref = useRef(null);
 
