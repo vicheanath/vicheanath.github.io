@@ -3,20 +3,45 @@ import Banner from "../components/banner";
 import gsap from "gsap";
 import Projects from "../components/Projects";
 import IntroOverlay from "../components/introOverlay";
+import Skills from "../components/Skills";
 
 let tl = gsap.timeline({ defaults: { duration: 1 } });
 
-const homeAnimation = (animationComplete) => {
+const homeAnimation = (completeAnimation) => {
   tl.from(".line span", {
     y: 100,
-    duration: 1.8,
+    ease: "power4.out",
     delay: 1,
     skewY: 7,
-    stagger: 0.3,
+    stagger: {
+      amount: 0.3,
+    },
   })
-    .to(".overlay-top", { height: 0, duration: 1, stagger: 0.4, delay: -0.5 })
-    .to(".overlay-bottom", { width: 0, duration: 1, stagger: 0.4, delay: -0.8 })
-    .to(".intro-overlay", { css: { display: "none" } });
+    .to(".overlay-top", {
+      height: 0,
+      ease: "expo.inOut",
+      stagger: 0.4,
+    })
+    .to(".overlay-bottom", {
+      width: 0,
+      ease: "expo.inOut",
+      delay: -0.8,
+      stagger: {
+        amount: 0.4,
+      },
+    })
+    .to(".intro-overlay", {
+      css: { display: "none" },
+    })
+    .from(".case-image img", {
+      scale: 1.4,
+      ease: "expo.inOut",
+      delay: -2,
+      stagger: {
+        amount: 0.4,
+      },
+      onComplete: completeAnimation,
+    });
 };
 
 const Home = () => {
@@ -30,11 +55,12 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container">
+    <React.Fragment>
       {!animationComplete ? <IntroOverlay /> : ""}
       <Banner />
       <Projects />
-    </div>
+      <Skills />
+    </React.Fragment>
   );
 };
 
