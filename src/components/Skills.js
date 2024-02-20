@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
 const SKILLS = [
   {
     name: "HTML",
@@ -43,25 +43,63 @@ const SKILLS = [
   },
 ];
 
+const divideSkillsToThree = (skills) => {
+  const third = Math.ceil(skills.length / 3);
+  return [
+    skills.slice(0, third),
+    skills.slice(third, third * 2),
+    skills.slice(third * 2, skills.length),
+  ];
+};
+
+// create loop scroll for skills section .skills-top-down .skills-middle .skills-bottom-up
+const loopScroll = (element, duration) => {
+  gsap.to(element, {
+    y: -100,
+    duration: duration,
+    repeat: -1,
+    yoyo: true,
+    ease: "power1.inOut",
+  });
+};
+
 const Skills = () => {
+  useEffect(() => {
+    const skillsTopDown = document.querySelectorAll(".skills-top-down");
+    const skillsMiddle = document.querySelectorAll(".skills-middle");
+    const skillsBottomUp = document.querySelectorAll(".skills-bottom-up");
+
+    loopScroll(skillsTopDown, 1);
+    loopScroll(skillsMiddle, 1.5);
+    loopScroll(skillsBottomUp, 2);
+  }, []);
+
+  const [first, second, third] = divideSkillsToThree(SKILLS);
+
   return (
-    <div className="container">
-      <div className="skills">
-        <div className="skills-content">
-          <div className="skills-header">
-            <h1>Skills</h1>
+    <section className="skills">
+      <div className="skills-top-down skill-list">
+        {first.map((skill, index) => (
+          <div key={index} className="skill">
+            <img src={skill.image} alt={skill.name} />
           </div>
-          <div className="skills-list">
-            {SKILLS.map((skill, index) => (
-              <div className="skill" key={index}>
-                <img src={skill.image} alt={skill.name} />
-                <h2>{skill.name}</h2>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
-    </div>
+      <div className="skills-middle skill-list">
+        {second.map((skill, index) => (
+          <div key={index} className="skill">
+            <img src={skill.image} alt={skill.name} />
+          </div>
+        ))}
+      </div>
+      <div className="skills-bottom-up skill-list">
+        {third.map((skill, index) => (
+          <div key={index} className="skill">
+            <img src={skill.image} alt={skill.name} />
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
