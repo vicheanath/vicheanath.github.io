@@ -23,7 +23,7 @@
       align-items: center;
       justify-content: center;
       svg {
-        color: $white;
+        color: var(--primary);
         height: 28px;
         width: 28px;
       }
@@ -38,7 +38,7 @@
     }
     .case {
       position: relative;
-      background: $black;
+      background: var(--secondary);
       cursor: pointer;
       &:hover {
         .case-image {
@@ -66,7 +66,7 @@
           margin-top: 156px;
           font-size: 1.6rem;
           opacity: 0.8;
-          color: $white;
+          color: var(--primary);
           font-weight: 600;
           @include media("<=desktop", ">tablet") {
             font-size: 1.4rem;
@@ -81,7 +81,7 @@
           line-height: 3.4rem;
           width: 85%;
           margin-top: 16px;
-          color: $white;
+          color: var(--primary);
           @include media("<=desktop", ">tablet") {
             font-size: 2rem;
             line-height: 2.4rem;

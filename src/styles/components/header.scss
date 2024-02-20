@@ -8,9 +8,9 @@
   }
   .logo {
     a {
-      font-size: 1.2rem;
-      letter-spacing: 0.5rem;
-      color: $black;
+      font-size: 1.5rem;
+      letter-spacing: 0.3rem;
+      color: var(--secondary);
       text-decoration: none;
       font-weight: 700;
     }
@@ -34,7 +34,7 @@
       span {
         text-align: center;
         margin-bottom: 0.3rem;
-        background: $black;
+        background: var(--secondary);
         height: 2px;
         width: 100%;
         display: block;
@@ -52,6 +52,30 @@
           width: 48px;
         }
       }
+    }
+    
+  }
+  .nav{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    
+
+  }
+  .theme-switcher{
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--primary);
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--secondary);
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--secondary);
     }
   }
 }

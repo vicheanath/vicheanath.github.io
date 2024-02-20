@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { gsap } from "gsap";
 
-const Cursor = () => {
+const Cursor = memo(() => {
   useEffect(() => {
     let cursor = document.querySelector(".cursor");
     const cursorMove = (e) => {
@@ -21,10 +21,10 @@ const Cursor = () => {
     };
 
     const cursorClick = () => {
-      cursor.classList.add("click");
+      cursor.classList.add("clicked");
 
       setTimeout(() => {
-        cursor.classList.remove("click");
+        cursor.classList.remove("clicked");
       }, 500);
     };
 
@@ -44,11 +44,15 @@ const Cursor = () => {
     const hoverDisplayImage = document.querySelectorAll(".hover-display-image");
 
     hoverDisplayImage.forEach((image) => {
+      if (!image.dataset.image) {
+        return;
+      }
       const imageURL = image.dataset.image;
       image.addEventListener("mouseover", () => {
         cursor.classList.add("hovered-image");
         gsap.to(cursor, { backgroundImage: `url(${imageURL})` });
       });
+
       image.addEventListener("mouseleave", () => {
         cursor.classList.remove("hovered-image");
         gsap.to(cursor, { backgroundImage: "none" });
@@ -71,6 +75,6 @@ const Cursor = () => {
       <div className="cursor"></div>
     </div>
   );
-};
+});
 
 export default Cursor;

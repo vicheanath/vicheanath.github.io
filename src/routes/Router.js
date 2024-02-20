@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Approach from "../pages/approach";
 import Services from "../pages/services";
-import About from "../pages/about";
+import About from "../pages/About";
 import Layout from "../components/Layout";
 import Home from "../pages/home";
 import CaseStudies from "../pages/caseStudies";

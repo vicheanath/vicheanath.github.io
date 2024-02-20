@@ -12,7 +12,7 @@ const Banner = () => {
         <div className="row">
           <h2
             className="main-title hover-display-image"
-            data-image={require("../assets/profile.jpeg")}
+            data-image="/assets/profile.jpg"
           >
             <div className="line">
               <span>Vichea Nath</span>
@@ -24,16 +24,16 @@ const Banner = () => {
           {/* <Profile/> */}
           <div className="btn-row">
             <div className="wrapper-btn">
-              <Link href="/" className="hover-rotate">
+              <Link href="/" className="hover-rotate clicked">
                 <RightArrow />
               </Link>
-              <Link to="htts://github.com/vicheanath">
+              <Link to="htts://github.com/vicheanath" className="clicked">
                 <Github />
               </Link>
-              <Link to="htts://linkedin.com/in/vicheanath">
+              <Link to="htts://linkedin.com/in/vicheanath" className="clicked">
                 <LinkedIn />
               </Link>
-              <Link to="htts://instagram.com/vicheanath">
+              <Link to="htts://instagram.com/vicheanath" className="clicked">
                 <Instagram />
               </Link>
             </div>

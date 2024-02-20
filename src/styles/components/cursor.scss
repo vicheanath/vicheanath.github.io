@@ -4,13 +4,14 @@
   pointer-events: none;
   width: 30px;
   height: 30px;
-  background-color: #000;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.3s ease;
   transition-property: width, height, border;
   mix-blend-mode: difference;
-  background-color: #fff;
+  background-color: #444242;
+  background-position: center;
+  background-size: cover;
   &.hovered {
     width: 50px;
     height: 50px;
@@ -20,6 +21,7 @@
     width: 70px;
     height: 70px;
     border-width: 4px;
+    pointer-events: none;
   }
 
   &.profile {
@@ -32,5 +34,7 @@
     height: 330px;
     border-width: 5px;
     mix-blend-mode: normal;
+    border: 2px solid var(--secondary);
   }
+
 }

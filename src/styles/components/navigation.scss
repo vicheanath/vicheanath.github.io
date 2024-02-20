@@ -7,7 +7,7 @@ nav {
   display: none;
   position: fixed;
   overflow: hidden;
-  background: $yellow;
+  background: var(--accent);
   a {
     position: relative;
     &:after {
@@ -18,7 +18,7 @@ nav {
       display: block;
       margin-top: 5px;
       right: 0;
-      background: $black;
+      background: var(--secondary);
       transition: 0.4s ease;
     }
     &:hover {
@@ -26,7 +26,7 @@ nav {
       &:after {
         width: 100%;
         left: 0;
-        background: $black;
+        background: var(--secondary);
       }
     }
   }
@@ -96,7 +96,7 @@ nav {
             }
             a {
               text-decoration: none;
-              color: $black;
+              color: var(--secondary);
             }
           }
         }
@@ -114,7 +114,7 @@ nav {
             font-weight: 600;
             font-size: 2.8rem;
             text-decoration: none;
-            color: $black;
+            color: var(--secondary);
             @include media("<=phone") {
               font-size: 2rem;
             }
