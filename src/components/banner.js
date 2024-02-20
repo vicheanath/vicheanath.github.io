@@ -21,7 +21,6 @@ const Banner = () => {
               <span>Full Stack Developer</span>
             </div>
           </h2>
-          {/* <Profile/> */}
           <div className="btn-row">
             <div className="wrapper-btn">
               <Link href="/" className="hover-rotate clicked">
