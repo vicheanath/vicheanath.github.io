@@ -1,0 +1,15 @@
+title: Vichea Nath
+description: A blog about software development, data science, and machine learning.
+baseurl: ""
+url: "https://vicheanath.com"
+author:
+  name: Vichea Nath
+  email: vicheanath@outlook.com
+  twitter_username: vicheanath
+  github_username: vicheanath
+  linkedin_username: vicheanath
+  facebook_username: vicheanath
+  instagram_username: vicheanath
+  medium_username: vicheanath
+
+theme: jekyll-theme-minimal
