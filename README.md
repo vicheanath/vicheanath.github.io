@@ -8,7 +8,17 @@ M.S in Computer Science
 **Royal University of Phnom Penh** - 10/2018 - 05/2022
 BS in Computer Science and Engineering
 
-
+## Technical Skills
+- **Languages:** Python, JavaScript, TypeScript, Java
+- **Web:**  HTML, CSS, Bootstrap, Tailwind CSS
+- **Web Services:**  REST, GraphQL
+- **Web/App Servers:**  Nginx, Apache, AWS Cloud, S3, EC2, ECR, Cloudflare
+- **Frameworks:**  Django, Flask, Spring Framework
+- **Databases:**  MySQL, PostgreSQL, MongoDB, Redis
+- **Design Patterns:** Singleton, Builder, Factory, Adapter, Observer, Strategy
+- **SDLC:** Agile / Scrum, XP, Kanban, DevOps, CI/CD, TDD
+- **Library:** Django Rest Framework, Celery, Graphene, Django-Channel, PyTest, SQLAlchemy, Pandas, NumPy, Socket.IO, React Query, Zod, React Hook Form, Express.js, Socket.IO, Webpack
+- **Tools:** Docker, GitHub, GitLap, Visual Studio Code, Figma, Jupyter Notebook, Jira, Power BI, DBeaver, Notion.
 
 
 ## Professional Experience
@@ -31,6 +41,7 @@ The company specializes in developing online betting websites, Sports Betting an
 
 ### PLAN-B | 09/2020 – 07/2021
 PLAN-B Cambodia is a leading Japanese IT solution company specializing in web development, and mobile app development.
+
 **UX/UI Designer**: Responsible for implementing Web Design, Mobile App Design, and UX/UI Design
 Responsibilities:
 •	Accountable for executing tasks as directed by the leader to ensure the project timeline meets the specified deadline.
