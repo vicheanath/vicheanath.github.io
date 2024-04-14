@@ -1,15 +1,6 @@
 title: Vichea Nath
-description: A blog about software development, data science, and machine learning.
-baseurl: ""
-url: "https://vicheanath.com"
-author:
-  name: Vichea Nath
-  email: vicheanath@outlook.com
-  twitter_username: vicheanath
-  github_username: vicheanath
-  linkedin_username: vicheanath
-  facebook_username: vicheanath
-  instagram_username: vicheanath
-  medium_username: vicheanath
-
+logo: https://avatars.githubusercontent.com/u/48352653?v=4
+description: A full-stack developer with 3 years of hands-on experience specializing in Python for sports betting domain. Proficient in Django, JavaScript, React.js, Celery Scheduling, Distributed Systems, CI/CD, and AWS Cloud services. Well-versed in Agile software development, web security and love to contribute to open-source project.  Additionally, open to learning new technologies and continuously evolving skills to stay abreast of the dynamic realm of modern enterprise software development.
+show_downloads: true
+google_analytics: 
 theme: jekyll-theme-minimal
