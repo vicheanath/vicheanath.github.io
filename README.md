@@ -1,10 +1,18 @@
 # Software Engineer
 
+## Education
+
+**Maharishi International University** - In progress via distance education expected completion 06/2026
+M.S in Computer Science
+
+**Royal University of Phnom Penh** - 10/2018 - 05/2022
+BS in Computer Science and Engineering
+
+
 
 
 ## Professional Experience
-### PHVCT A2888 Co., Ltd                                                               
-07/2021 – 08/2023
+### PHVCT A2888 Co., Ltd | 07/2021 – 08/2023
 The company specializes in developing online betting websites, Sports Betting and casino Systems for clients and selling by themself.
 
 **Senior Software Engineer**: Responsible for the comprehensive role of SDLC staying current with updates and addressing bug fixes within the company.
@@ -21,7 +29,7 @@ The company specializes in developing online betting websites, Sports Betting an
 •	Create and design the main page of a sports betting website using Python Django and JavaScript. The website serves a large user community, with over 50,000 players actively participating on the platform.
 •	Implemented a customer account tracking feature to monitor transaction completion and facilitate easy inspection of sales performance.
 
-### PLAN-B                                                                           09/2020 – 07/2021
+### PLAN-B | 09/2020 – 07/2021
 PLAN-B Cambodia is a leading Japanese IT solution company specializing in web development, and mobile app development.
 **UX/UI Designer**: Responsible for implementing Web Design, Mobile App Design, and UX/UI Design
 Responsibilities:
