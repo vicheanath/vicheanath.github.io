@@ -3,36 +3,24 @@ import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./About.scss";
+import { About, aboutData } from "./about";
 
-// About
-const About = () => {
-  const [abouts, setAbouts] = useState([]);
+const AboutPage: React.FC = () => {
+  const [abouts, setAbouts] = useState<About[]>([]);
 
-  let about = [
-    {
-      title: "UI/UX Design",
-      description:
-        "I focus on crafting beautiful, user-driven interfaces that are easy to use and understand.",
-      imgUrl: "https://cdn.sanity.io/images/3do82whm/production/7e7f1f4f0e7b4b3e8b3b3b3b3b3b3b3b3b3b3b3-2000x2000.png?w=200&h=200&fit=crop",
-    },
-  ];
-
-  // fetch about data
   useEffect(() => {
-    // const query = '*[_type == "abouts"]';
-
-
-    // client.fetch(query).then((data) => setAbouts(data));
-    setAbouts(about);
+    setAbouts(aboutData);
   }, []);
 
   return (
     <>
       {/* Heading */}
       <h2 className="head-text">
-        I Know that <span>Good Design</span>
+        Create a software that is <span>easy</span> to use and{" "}
+        <span>understand</span>
         <br />
-        means <span>Good Business</span>
+        write <span>clean</span>, <span>maintainable</span> and{" "}
+        <span>testable</span> code
       </h2>
 
       <div className="app__profiles">
@@ -61,8 +49,10 @@ const About = () => {
   );
 };
 
-export default AppWrap(
-  MotionWrap(About, "app__about"),
+const WrappedAboutPage = AppWrap(
+  MotionWrap(AboutPage, "app__about"),
   "about",
   "app__whitebg"
 );
+
+export default WrappedAboutPage;

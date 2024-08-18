@@ -40,6 +40,51 @@ import nb from "../assets/nb.png";
 import skype from "../assets/skype.png";
 import spotify from "../assets/spotify.png";
 
+import posgrest from "../assets/technology/posgrest.png";
+import docker from "../assets/technology/docker.png";
+import rabbitmq from "../assets/technology/rabbitmq.png";
+import redis from "../assets/technology/redis.png";
+import vite from "../assets/technology/vite.png";
+import jquery from "../assets/technology/jquery.png";
+import js from "../assets/technology/js.png";
+import csharp from "../assets/technology/csharp.png";
+import webpack from "../assets/technology/webpack.png";
+import efcore from "../assets/technology/efcore.png";
+import sqlserver from "../assets/technology/sqlserver.png";
+import angular from "../assets/technology/angular.png";
+import dotnetcore from "../assets/technology/dotnetcore.png";
+import simpaz from "../assets/brand/simpaz.png";
+import phvct from "../assets/brand/phvct.png";
+
+import thearong from "../assets/testimonial/thearong.jpg";
+import hout from "../assets/testimonial/hout.jpeg";
+
+const brands = {
+  simpaz,
+  phvct,
+};
+
+const testimonials = {
+  thearong,
+  hout,
+};
+
+const technologies = {
+  posgrest,
+  docker,
+  rabbitmq,
+  redis,
+  vite,
+  jquery,
+  js,
+  csharp,
+  webpack,
+  efcore,
+  sqlserver,
+  angular,
+  dotnetcore,
+};
+
 const images = {
   email,
   mobile,
@@ -74,6 +119,9 @@ const images = {
   nb,
   skype,
   spotify,
+  ...technologies,
+  ...brands,
+  ...testimonials,
 };
 
 export default images;

@@ -1,9 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { JSX } from "react/jsx-runtime";
 
 // Motion Wrap
-const MotionWrap = (Component: JSX.IntrinsicAttributes, classNames: string) =>
+const MotionWrap = (Component: React.FC, classNames: string) =>
   function HOC() {
     return (
       <motion.div
@@ -11,7 +10,6 @@ const MotionWrap = (Component: JSX.IntrinsicAttributes, classNames: string) =>
         transition={{ duration: 0.5 }}
         className={`${classNames} app__flex`}
       >
-        {/* Component */}
         <Component />
       </motion.div>
     );

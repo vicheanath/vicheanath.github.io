@@ -32,13 +32,12 @@ const Header = () => {
             <span>👋</span>
             <div style={{ marginLeft: 20 }}>
               <p className="p-text">Hello, I am</p>
-              <h1 className="head-text">Micael</h1>
+              <h1 className="head-text">Vichea</h1>
             </div>
           </div>
 
           <div className="tag-cmp app__flex">
-            <p className="p-text">Web Developer</p>
-            <p className="p-text">Freelancer</p>
+            <p className="p-text">Full Stack Developer</p>
           </div>
         </div>
       </motion.div>
@@ -66,11 +65,13 @@ const Header = () => {
         whileInView={scaleVariants.whileInView}
         className="app__header-circles"
       >
-        {[images.flutter, images.redux, images.sass].map((circle, index) => (
-          <div className="circle-cmp app__flex" key={`circle-${index}`}>
-            <img src={circle} alt="Circle" />
-          </div>
-        ))}
+        {[images.dotnetcore, images.react, images.posgrest].map(
+          (circle, index) => (
+            <div className="circle-cmp app__flex" key={`circle-${index}`}>
+              <img src={circle} alt="Circle" />
+            </div>
+          )
+        )}
       </motion.div>
     </div>
   );

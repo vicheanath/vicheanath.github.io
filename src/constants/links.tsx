@@ -14,8 +14,8 @@ const navbar_links = [
 
 // Contact links
 const contact_links = {
-  email: "contactme@micael.com",
-  phone: "+1 (123) 456-789",
+  email: "vicheanath23@gmail.com",
+  phone: "+1 (641)-233-9735",
 };
 
 // Social links
@@ -23,29 +23,33 @@ const social_links = [
   {
     name: "Twitter",
     icon: <BsTwitter />,
-    url: "http://twitter.com",
+    url: "http://twitter.com/vicheanath",
   },
   {
     name: "Facebook",
     icon: <FaFacebookF />,
-    url: "http://facebook.com",
+    url: "http://facebook.com/vicheanath",
   },
   {
     name: "Github",
     icon: <AiFillGithub />,
-    url: "http://github.com",
+    url: "http://github.com/vicheanath",
   },
 ];
 
 // Source code
-const source_code = "https://github.com/sanidhyy/portfolio-react";
+const resume =
+  "https://drive.google.com/file/d/1U2creThYu3NTbAxReK7pWOkxKocHroL7/view?usp=sharing";
+
+const github = "https://github.com/vicheanath";
 
 // links
 const links = {
   navbar_links,
   contact_links,
   social_links,
-  source_code,
+  resume,
+  github,
 };
 
 export default links;

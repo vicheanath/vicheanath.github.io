@@ -5,7 +5,7 @@ import { Navbar } from "./components";
 import "./App.scss";
 
 // App
-const App : React.FC = () => {
+const App: React.FC = () => {
   return (
     <div className="app">
       <Navbar />

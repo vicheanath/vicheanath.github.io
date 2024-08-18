@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { motion } from "framer-motion";
 
-import { images, links } from "../../constants";
+import { links } from "../../constants";
 import "./Navbar.scss";
 
 // Navbar
@@ -28,7 +28,7 @@ const Navbar = () => {
       <div className="app__navbar-logo">
         {/* Logo */}
         <a href={`#${links.navbar_links[0]}`} title="Micael">
-          <img src={images.logo} alt="Micael" />
+          Vichea Nath
         </a>
       </div>
       <ul className="app__navbar-links">
@@ -51,9 +51,9 @@ const Navbar = () => {
         type="button"
         className="app__navbar-btn"
         title="View Source Code on Github"
-        onClick={() => window.open(links.source_code, "_blank", "noopener")}
+        onClick={() => window.open(links.resume, "_blank", "noopener")}
       >
-        Source Code
+        Resume
       </button>
 
       <div className="app__navbar-menu">
@@ -83,12 +83,12 @@ const Navbar = () => {
               {/* Source Code [MOBILE] */}
               <li key="source-code">
                 <a
-                  href={links.source_code}
+                  href={links.resume}
                   target="_blank"
                   rel="noreferrer noopener"
                   title="View Source Code on Github"
                 >
-                  Source Code
+                  Resume
                 </a>
               </li>
             </ul>

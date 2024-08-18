@@ -11,25 +11,27 @@ const Footer = () => {
     email: "",
     message: "",
   });
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { name, email, message } = formData;
 
   // handle input change
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     setFormData({ ...formData, [name]: value });
   };
 
   // Check if string is empty or contains whitespaces
-  const isEmptyOrSpaces = (str) => {
+  const isEmptyOrSpaces = (str: string) => {
     return /^\s*$/.test(str);
   };
 
   // email validation
-  const isInvalidEmail = (email) => {
+  const isInvalidEmail = (email: string) => {
     const regex = new RegExp( // eslint-disable-next-line
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     );
@@ -38,9 +40,9 @@ const Footer = () => {
 
   // handle submit
   const handleSubmit = () => {
-    const name_in = document.getElementById("name");
-    const email_in = document.getElementById("email");
-    const message_in = document.getElementById("message");
+    const name_in = document.getElementById("name") as HTMLInputElement;
+    const email_in = document.getElementById("email") as HTMLInputElement;
+    const message_in = document.getElementById("message") as HTMLInputElement;
 
     // validate name
     if (isEmptyOrSpaces(name) || name.length < 3) {
@@ -67,12 +69,6 @@ const Footer = () => {
     }
 
     setLoading(true);
-
-    // submit form to sanity
-    // client.create(contact).then(() => {
-    //   setLoading(false);
-    //   setIsFormSubmitted(true);
-    // });
   };
 
   return (

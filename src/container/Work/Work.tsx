@@ -4,42 +4,29 @@ import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./Work.scss";
+import { Tag, Work, worksData } from "./work";
 
-// Work
-const Work = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
+const WorkPage: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<Tag>(Tag.ALL);
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-  const [works, setWorks] = useState([]);
-  const [filterWork, setFilterWork] = useState([]);
-
-  let work = [
-    {
-      title: "Work Title",
-      description: "Work Description",
-      imgUrl: "https://cdn.sanity.io/images/3do82whm/production/7e7f1f4f0e7b4b3e8b3b3b3b3b3b3b3b3b3b3b3-2000x2000.png?w=200&h=200&fit=crop",
-      tags: ["UI/UX"],
-      projectLink: "https://www.google.com",
-      codeLink: "https://www.google.com",
-    },
-  ];
-
-
+  const [works, setWorks] = useState<Work[]>([]);
+  const [filterWork, setFilterWork] = useState<Work[]>([]);
 
   // fetch works data
   useEffect(() => {
-    setWorks(work);
-    setFilterWork(work);
+    setWorks(worksData);
+    setFilterWork(worksData);
   }, []);
 
   // handle work filter
-  const handleWorkFilter = (item) => {
+  const handleWorkFilter = (item: Tag) => {
     setActiveFilter(item);
-    setAnimateCard([{ y: 100, opacity: 0 }]);
+    setAnimateCard({ y: 100, opacity: 0 });
 
     setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
+      setAnimateCard({ y: 0, opacity: 1 });
 
-      if (item === "All") {
+      if (item === Tag.ALL) {
         setFilterWork(works);
       } else {
         setFilterWork(works.filter((work) => work.tags.includes(item)));
@@ -56,19 +43,17 @@ const Work = () => {
 
       {/* Work Filters */}
       <div className="app__work-filter">
-        {["UI/UX", "Web App", "Mobile App", "React JS", "All"].map(
-          (item, index) => (
-            <div
-              key={index}
-              onClick={() => handleWorkFilter(item)}
-              className={`app__work-filter-item app__flex p-text ${
-                activeFilter === item ? "item-active" : ""
-              }`}
-            >
-              {item}
-            </div>
-          )
-        )}
+        {Tag.getTags().map((item: Tag, index) => (
+          <div
+            key={index}
+            onClick={() => handleWorkFilter(item)}
+            className={`app__work-filter-item app__flex p-text ${
+              activeFilter === item ? "item-active" : ""
+            }`}
+          >
+            {item.name}
+          </div>
+        ))}
       </div>
 
       {/* Work list */}
@@ -81,7 +66,7 @@ const Work = () => {
           <div className="app__work-item app__flex" key={index}>
             <div className="app__work-img app__flex">
               {/* work image */}
-              <img src={work.imgUrl} alt={work.name} />
+              <img src={work.imageUrl} alt={work.title} />
 
               <motion.div
                 whileHover={{ opacity: [0, 1] }}
@@ -126,7 +111,7 @@ const Work = () => {
 
               {/* work tags */}
               <div className="app__work-tag app__flex">
-                <p className="p-text">{work.tags[0]}</p>
+                <p className="p-text">{work.tags[0].name}</p>
               </div>
             </div>
           </div>
@@ -136,4 +121,9 @@ const Work = () => {
   );
 };
 
-export default AppWrap(MotionWrap(Work, "app__work"), "work", "app__primarybg");
+const WrappedWorkPage = AppWrap(
+  MotionWrap(WorkPage, "app__work"),
+  "work",
+  "app__primarybg"
+);
+export default WrappedWorkPage;
