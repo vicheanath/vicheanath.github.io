@@ -14,13 +14,11 @@ const AboutPage: React.FC = () => {
 
   return (
     <>
-      {/* Heading */}
       <h2 className="head-text">
-        Create a software that is <span>easy</span> to use and{" "}
-        <span>understand</span>
+        Develop intuitive and <span>user-friendly</span> software
         <br />
-        write <span>clean</span>, <span>maintainable</span> and{" "}
-        <span>testable</span> code
+        through <span>clean</span>, <span>maintainable</span>, and
+        <span>testable code</span>.
       </h2>
 
       <div className="app__profiles">
