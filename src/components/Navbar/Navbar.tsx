@@ -27,7 +27,7 @@ const Navbar = () => {
     <nav className="app__navbar">
       <div className="app__navbar-logo">
         {/* Logo */}
-        <a href={`#${links.navbar_links[0]}`} title="Micael">
+        <a href={`#${links.navbar_links[0]}`} title="Vichea Nath">
           Vichea Nath
         </a>
       </div>
