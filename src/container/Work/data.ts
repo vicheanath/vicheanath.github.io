@@ -50,9 +50,9 @@ export class Tag {
   static FULL_STACK = new Tag("Full Stack", "#313BAC");
 
   static tags: Tag[] = [
+    Tag.ALL,
     Tag.SYSTEM,
     Tag.WEB_DEVELOPMENT,
-    Tag.ALL,
     Tag.MOBILE_APP,
     Tag.REACT_JS,
   ];
