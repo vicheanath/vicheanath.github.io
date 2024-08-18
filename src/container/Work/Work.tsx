@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./Work.scss";
-import { Tag, Work, worksData } from "./work";
+import { Tag, Work, worksData } from "./data";
 
 const WorkPage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<Tag>(Tag.ALL);

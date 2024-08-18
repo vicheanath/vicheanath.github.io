@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 
 import { AppWrap } from "../../wrapper";
@@ -18,7 +17,7 @@ const scaleVariants = {
 };
 
 // Header
-const Header = () => {
+const HeaderPage: React.FC = () => {
   return (
     <div id="home" className="app__header app__flex">
       {/* About Me */}
@@ -77,4 +76,5 @@ const Header = () => {
   );
 };
 
-export default AppWrap(Header, "home");
+const WrappedHeader = AppWrap(HeaderPage, "home", "Header");
+export default WrappedHeader;

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./About.scss";
-import { About, aboutData } from "./about";
+import { About, aboutData } from "./data";
 
 const AboutPage: React.FC = () => {
   const [abouts, setAbouts] = useState<About[]>([]);

@@ -8,7 +8,7 @@ import {
   BrandModel,
   TestimonialModel,
   testimonialsData,
-} from "./testimonial";
+} from "./data";
 import { motion } from "framer-motion";
 
 const TestimonialPage: React.FC = () => {

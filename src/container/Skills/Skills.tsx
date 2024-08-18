@@ -6,8 +6,7 @@ import "./Skills.scss";
 import { Skill, skillData } from "./skill";
 import { Experience, experienceData } from "./experience";
 
-// Skills
-const Skills = () => {
+const Skills: React.FC = () => {
   const [experience, setExperience] = useState<Experience[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   useEffect(() => {
@@ -116,8 +115,10 @@ const JobDescriptionCollapsible = ({
   );
 };
 
-export default AppWrap(
+const WrappedSkills = AppWrap(
   MotionWrap(Skills, "app__skills"),
   "skills",
   "app__whitebg"
 );
+
+export default WrappedSkills;
