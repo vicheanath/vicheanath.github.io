@@ -85,7 +85,6 @@ interface JobDescriptionCollapsibleProps {
 const JobDescriptionCollapsible = ({
   jobDescriptions,
 }: JobDescriptionCollapsibleProps) => {
-  // show only 3 job descriptions
   const [showCount, setShowCount] = useState<number>(3);
 
   const showMore = jobDescriptions.length > showCount;
@@ -103,12 +102,19 @@ const JobDescriptionCollapsible = ({
           </li>
         ))}
       </ul>
-      {showMore && (
+      {showMore ? (
         <motion.div
           onClick={showMoreHandler}
           className="app__skills-exp-show-more"
         >
-          <p className="p-text">Show more</p>
+          <p className="p-text text-link">Show more</p>
+        </motion.div>
+      ) : (
+        <motion.div
+          onClick={() => setShowCount(3)}
+          className="app__skills-exp-show-more"
+        >
+          <p className="p-text text-link">Show less</p>
         </motion.div>
       )}
     </>

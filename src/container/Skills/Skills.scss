@@ -131,6 +131,17 @@
     margin-bottom: 1rem;
   }
 }
+.app__skills-exp-show-more {
+  display: flex;
+  margin-top: 1rem;
+  cursor: pointer;
+  color: var(--secondary-color);
+  font-weight: 500;
+  :hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+  }
+}
 
 .app__skills-exp-item {
   width: 100%;

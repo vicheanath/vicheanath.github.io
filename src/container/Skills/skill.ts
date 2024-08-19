@@ -31,6 +31,6 @@ export const skillData = [
   new Skill("TypeScript", images.typescript, "#77c0f0"),
   new Skill("HTML", images.html, "#eb9580"),
   new Skill("JavaScript", images.javascript, "#f0db4f"),
-  new Skill("Git", images.mu5, "#aad4eb"),
+  new Skill("Git", images.git, "#aad4eb"),
   new Skill("Node", images.node, "#a9e4a1"),
 ];
