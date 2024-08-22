@@ -101,7 +101,7 @@ export const experienceData: Experience[] = [
   }),
 
   new Experience({
-    startDate: new Date(2020, 9),
+    startDate: new Date(2019, 1),
     endDate: new Date(2021, 6),
     companyNames: "PLAN-B CAMBODIA",
     location: "Phnom Penh, Cambodia",
