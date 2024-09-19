@@ -39,7 +39,7 @@ const social_links = [
 
 // Source code
 const resume =
-  "https://drive.google.com/file/d/1WM_8jrfvfMHLODZHvknEENkJ6FCuHfoO/view?usp=sharing";
+  "https://drive.google.com/file/d/1kqwOwA_qNEfJbOPkpcRmWV9ZjPpd2sGq/view?usp=sharing";
 
 const github = "https://github.com/vicheanath";
 
