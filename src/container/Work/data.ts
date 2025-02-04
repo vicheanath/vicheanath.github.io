@@ -63,25 +63,6 @@ export class Tag {
 
 export const worksData: Work[] = [
   new Work(
-    "2MWin",
-    "2MWin is a online betting platform that allows users to bet on sports, casino, virtual games and more.",
-    _2mwin,
-    "https://2mwin.com",
-    "https://2mwin.com",
-    [Tag.WEB_DEVELOPMENT, Tag.WEB_DEVELOPMENT],
-    [".NET Core", "MVC", "SQL Server", "JQuery", "Bootstrap"]
-  ),
-  new Work(
-    "Haha855",
-    "Haha855 is a online betting platform that allows users to bet on sports, casino, virtual games and more.",
-    haha855,
-    "https://855haha.com",
-    "https://855haha.com",
-    [Tag.WEB_DEVELOPMENT, Tag.REACT_JS],
-    [".NET Core", "React JS", "SQL Server"]
-  ),
-
-  new Work(
     "CS System",
     "CS System multi-tenant system is a for managing and tracking the payment of the company's employees.",
     cssystem,
