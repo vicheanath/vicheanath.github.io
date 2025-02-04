@@ -1,5 +1,3 @@
-import _2mwin from "./../../assets/projects/2mwin.png";
-import haha855 from "./../../assets/projects/haha.png";
 import cssystem from "./../../assets/projects/cssystem.png";
 import location from "./../../assets/projects/location.png";
 
@@ -71,7 +69,6 @@ export const worksData: Work[] = [
     [Tag.SYSTEM, Tag.FULL_STACK],
     [".NET Core", "MVC", "Postgres", "Bootstrap", "React JS"]
   ),
-
   new Work(
     "Location",
     "Location is a web based system that allows users to track the location of their agents, across the country.",
