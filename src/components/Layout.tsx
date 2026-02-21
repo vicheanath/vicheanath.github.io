@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom';
-import { Home, Newspaper, Github } from 'lucide-react';
+import { Home, Newspaper, FolderGit2, Github } from 'lucide-react';
 import profileData from '../content/profile.json';
 
 const profile = profileData as { name: string };
@@ -31,15 +31,10 @@ export default function Layout() {
             <Newspaper size={18} aria-hidden />
             <span>Posts</span>
           </NavLink>
-          <a
-            href="https://github.com/vicheanath/vicheanath.github.io"
-            className="nav__link nav__link--external"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github size={18} aria-hidden />
-            <span>GitHub</span>
-          </a>
+          <NavLink to="/projects" className="nav__link">
+            <FolderGit2 size={18} aria-hidden />
+            <span>Projects</span>
+          </NavLink>
         </nav>
       </header>
       <main className="main" id="main">

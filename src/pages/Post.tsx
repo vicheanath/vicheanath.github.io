@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ArrowLeft, FileX } from 'lucide-react';
 import { getPostBySlug } from '../lib/posts';
 
@@ -33,7 +35,38 @@ export default function Post() {
         </time>
       </header>
       <div className="article__body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            code({ node, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || '');
+              const isBlock = match != null;
+              if (isBlock) {
+                return (
+                  <div className="article__code-block">
+                    <SyntaxHighlighter
+                      style={oneDark}
+                      language={match[1]}
+                      PreTag="div"
+                      customStyle={{ margin: 0, padding: 0, borderRadius: '4px', borderLeft: '3px solid var(--ink-muted)' }}
+                      codeTagProps={{ style: { fontSize: '0.9rem', lineHeight: 1.5, padding: 0 } }}
+                      showLineNumbers={false}
+                    >
+                      {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
+                  </div>
+                );
+              }
+              return (
+                <code className={className ?? ''} {...props}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {post.body}
+        </ReactMarkdown>
       </div>
       <footer className="article__footer">
         <Link to="/" className="article__back-link">
