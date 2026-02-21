@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/generate-posts.js && vite",
-    "build": "node scripts/generate-posts.js && tsc -b && vite build && node scripts/copy-404.js",
+    "build": "node scripts/generate-posts.js && tsc -b && vite build && node scripts/generate-sitemap.js && node scripts/copy-404.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

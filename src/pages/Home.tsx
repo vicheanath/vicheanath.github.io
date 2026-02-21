@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Newspaper, Calendar, ChevronRight, Inbox, Linkedin, Briefcase, GraduationCap } from 'lucide-react';
+import Seo from '../components/Seo';
 import { getAllPosts } from '../lib/posts';
 import profileData from '../content/profile.json';
 
@@ -36,6 +37,7 @@ export default function Home() {
 
   return (
     <section className="home">
+      <Seo title={`${profile.name} — Personal bulletins`} description={profile.about ?? undefined} path="" />
       <div className="home__profile">
         <h2 className="home__profile-heading">About</h2>
         <p className="home__profile-name">

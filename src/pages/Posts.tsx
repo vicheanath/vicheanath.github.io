@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Newspaper, Calendar, ChevronRight, Inbox } from 'lucide-react';
+import Seo from '../components/Seo';
 import { getAllPosts } from '../lib/posts';
 
 export default function Posts() {
@@ -7,6 +8,7 @@ export default function Posts() {
 
   return (
     <section className="home home--posts-only">
+      <Seo title="Posts — Vichea Nath" description="Blog posts and notes on software, architecture, and development." path="posts" />
       <h2 className="home__heading">
         <Newspaper size={22} aria-hidden />
         <span>Posts</span>

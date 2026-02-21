@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FolderGit2, Github, Loader2, Star } from "lucide-react";
+import Seo from "../components/Seo";
 
 const GITHUB_USER = "vicheanath";
 const EXTRA_REPOS = [
@@ -151,6 +152,7 @@ export default function Projects() {
 
   return (
     <section className="projects">
+      <Seo title="Projects — Vichea Nath" description="Pinned and featured GitHub projects." path="projects" />
       <h2 className="projects__heading">
         <FolderGit2 size={22} aria-hidden />
         <span>Projects</span>

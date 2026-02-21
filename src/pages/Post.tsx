@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ArrowLeft, FileX } from 'lucide-react';
+import Seo from '../components/Seo';
 import { getPostBySlug } from '../lib/posts';
 
 export default function Post() {
@@ -13,6 +14,7 @@ export default function Post() {
   if (!post) {
     return (
       <article className="article article--missing">
+        <Seo title="Not found — Vichea Nath" path={slug ? `post/${slug}` : ''} />
         <div className="article__missing-icon">
           <FileX size={40} aria-hidden />
         </div>
@@ -28,6 +30,7 @@ export default function Post() {
 
   return (
     <article className="article">
+      <Seo title={`${post.title} — Vichea Nath`} description={post.excerpt} path={`post/${post.slug}`} />
       <header className="article__header">
         <h1 className="article__title">{post.title}</h1>
         <time className="article__date" dateTime={post.date}>
