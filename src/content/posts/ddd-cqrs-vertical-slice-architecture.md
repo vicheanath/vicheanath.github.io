@@ -14,6 +14,18 @@ excerpt: "Low-context structure for features: one slice per use case, CQRS, and 
 
 This keeps context low: to add or change “Place order”, you open one folder and a few files.
 
+## How the slice fits together
+
+```mermaid
+flowchart LR
+    UI[API or UI] --> Request[Command or Query]
+    Request --> Handler[Feature Handler]
+    Handler --> Domain[Aggregate / Value Objects]
+    Handler --> Infra[Repository / External Adapter]
+    Infra --> Handler
+    Handler --> Response[DTO or Result]
+```
+
 ## Folder layout (low context)
 
 ```

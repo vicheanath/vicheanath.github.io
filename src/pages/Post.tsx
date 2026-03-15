@@ -3,10 +3,36 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ArrowLeft, FileX } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Clock3, FileX, NotebookPen } from 'lucide-react';
 import Seo from '../components/Seo';
+import MermaidDiagram from '../components/MermaidDiagram';
 import { getPostBySlug } from '../lib/posts';
 import { SITE_NAME, SITE_URL } from '../lib/site';
+
+function formatPostDate(date: string) {
+  const parsed = new Date(date);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return date;
+  }
+
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(parsed);
+}
+
+function getReadingTimeMinutes(body: string) {
+  const words = body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]+`/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length;
+
+  return Math.max(1, Math.round(words / 220));
+}
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,6 +54,9 @@ export default function Post() {
       </article>
     );
   }
+
+  const publishedLabel = formatPostDate(post.date);
+  const readingTime = getReadingTimeMinutes(post.body);
 
   return (
     <article className="article">
@@ -56,35 +85,81 @@ export default function Post() {
           url: `${SITE_URL}/post/${post.slug}`,
         }}
       />
-      <header className="article__header">
+      <Link to="/posts" className="article__crumb">
+        <ArrowLeft size={16} aria-hidden />
+        <span>All posts</span>
+      </Link>
+
+      <header className="article__header article__header--hero">
+        <p className="article__eyebrow">Technical bulletin</p>
         <h1 className="article__title">{post.title}</h1>
-        <time className="article__date" dateTime={post.date}>
-          {post.date}
-        </time>
+        <p className="article__excerpt">{post.excerpt}</p>
+        <div className="article__meta">
+          <span className="article__meta-item">
+            <CalendarDays size={15} aria-hidden />
+            <time className="article__date" dateTime={post.date}>
+              {publishedLabel}
+            </time>
+          </span>
+          <span className="article__meta-item">
+            <Clock3 size={15} aria-hidden />
+            <span>{readingTime} min read</span>
+          </span>
+          <span className="article__meta-item">
+            <NotebookPen size={15} aria-hidden />
+            <span>Original article by {SITE_NAME}</span>
+          </span>
+        </div>
       </header>
+
       <div className="article__body">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
             code({ className, children, ...props }) {
+              const source = String(children).replace(/\n$/, '');
               const match = /language-(\w+)/.exec(className || '');
-              const isBlock = match != null;
+              const language = match?.[1]?.toLowerCase() ?? 'text';
+              const isBlock = match != null || source.includes('\n');
+
+              if (language === 'mermaid') {
+                return <MermaidDiagram key={source} chart={source} />;
+              }
+
               if (isBlock) {
                 return (
-                  <div className="article__code-block">
-                    <SyntaxHighlighter
-                      style={oneDark}
-                      language={match[1]}
-                      PreTag="div"
-                      customStyle={{ margin: 0, padding: 0, borderRadius: '4px', borderLeft: '3px solid var(--ink-muted)' }}
-                      codeTagProps={{ style: { fontSize: '0.9rem', lineHeight: 1.5, padding: 0 } }}
-                      showLineNumbers={false}
-                    >
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  </div>
+                  <figure className="article__code-block">
+                    <figcaption className="article__code-label">{language}</figcaption>
+                    <div className="article__code-surface">
+                      <SyntaxHighlighter
+                        style={oneDark}
+                        language={language === 'text' ? undefined : language}
+                        PreTag="div"
+                        customStyle={{
+                          margin: 0,
+                          padding: '1rem 1.1rem',
+                          borderRadius: 0,
+                          border: 'none',
+                          background: 'transparent',
+                        }}
+                        codeTagProps={{
+                          style: {
+                            display: 'block',
+                            fontSize: '0.92rem',
+                            lineHeight: 1.65,
+                            padding: 0,
+                            minWidth: 'max-content',
+                          },
+                        }}
+                        showLineNumbers={false}
+                      >
+                        {source}
+                      </SyntaxHighlighter>
+                    </div>
+                  </figure>
                 );
               }
+
               return (
                 <code className={className ?? ''} {...props}>
                   {children}
@@ -96,6 +171,7 @@ export default function Post() {
           {post.body}
         </ReactMarkdown>
       </div>
+
       <footer className="article__footer">
         <p className="article__byline">
           Written by {SITE_NAME}. For privacy, advertising, and publishing disclosures, see the site
