@@ -6,6 +6,7 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ArrowLeft, FileX } from 'lucide-react';
 import Seo from '../components/Seo';
 import { getPostBySlug } from '../lib/posts';
+import { SITE_NAME, SITE_URL } from '../lib/site';
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
@@ -30,7 +31,31 @@ export default function Post() {
 
   return (
     <article className="article">
-      <Seo title={`${post.title} — Vichea Nath`} description={post.excerpt} path={`post/${post.slug}`} />
+      <Seo
+        title={`${post.title} — ${SITE_NAME}`}
+        description={post.excerpt}
+        path={`post/${post.slug}`}
+        type="article"
+        publishedTime={post.date}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          dateModified: post.date,
+          author: {
+            '@type': 'Person',
+            name: SITE_NAME,
+          },
+          publisher: {
+            '@type': 'Person',
+            name: SITE_NAME,
+          },
+          mainEntityOfPage: `${SITE_URL}/post/${post.slug}`,
+          url: `${SITE_URL}/post/${post.slug}`,
+        }}
+      />
       <header className="article__header">
         <h1 className="article__title">{post.title}</h1>
         <time className="article__date" dateTime={post.date}>
@@ -72,10 +97,19 @@ export default function Post() {
         </ReactMarkdown>
       </div>
       <footer className="article__footer">
-        <Link to="/" className="article__back-link">
-          <ArrowLeft size={18} aria-hidden />
-          <span>Back to front page</span>
-        </Link>
+        <p className="article__byline">
+          Written by {SITE_NAME}. For privacy, advertising, and publishing disclosures, see the site
+          policies linked below.
+        </p>
+        <div className="article__actions">
+          <Link to="/posts" className="article__back-link">
+            <ArrowLeft size={18} aria-hidden />
+            <span>Back to all posts</span>
+          </Link>
+          <Link to="/privacy" className="article__back-link">
+            <span>Privacy Policy</span>
+          </Link>
+        </div>
       </footer>
     </article>
   );

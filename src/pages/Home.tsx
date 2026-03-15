@@ -3,6 +3,7 @@ import { Newspaper, Calendar, ChevronRight, Inbox, Linkedin, Briefcase, Graduati
 import Seo from '../components/Seo';
 import { getAllPosts } from '../lib/posts';
 import profileData from '../content/profile.json';
+import { DEFAULT_DESCRIPTION, GITHUB_URL, SITE_URL } from '../lib/site';
 
 interface ExperienceItem {
   title: string;
@@ -37,7 +38,33 @@ export default function Home() {
 
   return (
     <section className="home">
-      <Seo title={`${profile.name} — Personal bulletins`} description={profile.about ?? undefined} path="" />
+      <Seo
+        title={`${profile.name} — Personal bulletins`}
+        description={profile.about ?? DEFAULT_DESCRIPTION}
+        path=""
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: profile.name,
+            url: SITE_URL,
+            description: profile.about ?? DEFAULT_DESCRIPTION,
+            inLanguage: 'en-US',
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: profile.name,
+            jobTitle: profile.headline,
+            homeLocation: {
+              '@type': 'Place',
+              name: profile.location,
+            },
+            sameAs: [profile.linkedInUrl, GITHUB_URL],
+            url: SITE_URL,
+          },
+        ]}
+      />
       <div className="home__profile">
         <h2 className="home__profile-heading">About</h2>
         <p className="home__profile-name">
@@ -103,6 +130,20 @@ export default function Home() {
             </ul>
           </div>
         )}
+
+        <div className="home__site-note">
+          <h3 className="home__profile-subheading">About this site</h3>
+          <p className="home__profile-about-text">
+            This is a personal technical blog with original long-form notes on backend architecture,
+            frontend development, and software delivery. Important site details are easy to find so readers
+            and reviewers can verify who publishes the content and how the site operates.
+          </p>
+          <div className="home__site-links">
+            <Link to="/contact">Contact</Link>
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/publishing-policy">Publishing Policy</Link>
+          </div>
+        </div>
 
         <a
           href={profile.linkedInUrl}

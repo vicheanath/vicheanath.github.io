@@ -1,6 +1,7 @@
-import { Outlet, NavLink } from 'react-router-dom';
-import { Home, Newspaper, FolderGit2, Github } from 'lucide-react';
+import { Link, Outlet, NavLink } from 'react-router-dom';
+import { Home, Newspaper, FolderGit2, Github, Mail } from 'lucide-react';
 import profileData from '../content/profile.json';
+import { SOURCE_REPO_URL } from '../lib/site';
 
 const profile = profileData as { name: string };
 
@@ -35,18 +36,26 @@ export default function Layout() {
             <FolderGit2 size={18} aria-hidden />
             <span>Projects</span>
           </NavLink>
+          <NavLink to="/contact" className="nav__link">
+            <Mail size={18} aria-hidden />
+            <span>Contact</span>
+          </NavLink>
         </nav>
       </header>
       <main className="main" id="main">
         <Outlet />
       </main>
       <footer className="footer">
-        <span>Built with React · Vite</span>
-        <span className="footer__sep">·</span>
-        <a href="https://github.com/vicheanath/vicheanath.github.io" target="_blank" rel="noopener noreferrer">
-          <Github size={14} aria-hidden />
-          <span>Source</span>
-        </a>
+        <p className="footer__line">{profile.name} · original software notes and project updates</p>
+        <div className="footer__links">
+          <Link to="/privacy">Privacy Policy</Link>
+          <Link to="/publishing-policy">Publishing Policy</Link>
+          <Link to="/contact">Contact</Link>
+          <a href={SOURCE_REPO_URL} target="_blank" rel="noopener noreferrer">
+            <Github size={14} aria-hidden />
+            <span>Source</span>
+          </a>
+        </div>
       </footer>
     </div>
   );

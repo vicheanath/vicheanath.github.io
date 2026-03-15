@@ -4,6 +4,10 @@ import Home from './pages/Home';
 import Posts from './pages/Posts';
 import Post from './pages/Post';
 import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import PublishingPolicy from './pages/PublishingPolicy';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +18,10 @@ const router = createBrowserRouter([
       { path: 'posts', element: <Posts /> },
       { path: 'post/:slug', element: <Post /> },
       { path: 'projects', element: <Projects /> },
+      { path: 'contact', element: <Contact /> },
+      { path: 'privacy', element: <Privacy /> },
+      { path: 'publishing-policy', element: <PublishingPolicy /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);

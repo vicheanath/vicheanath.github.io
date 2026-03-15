@@ -13,6 +13,9 @@ export default function Posts() {
         <Newspaper size={22} aria-hidden />
         <span>Posts</span>
       </h2>
+      <p className="home__intro">
+        Original articles on software architecture, .NET, React, and day-to-day engineering practice.
+      </p>
       {posts.length === 0 ? (
         <div className="home__empty">
           <Inbox size={48} aria-hidden />
