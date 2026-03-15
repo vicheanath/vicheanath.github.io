@@ -1,5 +1,11 @@
-import Router from './router'
+import AdSenseBootstrap from './components/AdSenseBootstrap';
+import Router from './router';
 
 export default function App() {
-  return <Router />
+  return (
+    <>
+      <AdSenseBootstrap />
+      <Router />
+    </>
+  );
 }

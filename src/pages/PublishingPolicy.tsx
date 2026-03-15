@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import { SITE_NAME, SITE_URL } from '../lib/site';
+import { ADSENSE_ENABLED, SITE_NAME, SITE_URL } from '../lib/site';
 
 export default function PublishingPolicy() {
   return (
@@ -62,6 +62,11 @@ export default function PublishingPolicy() {
         <p>
           This site may use Google AdSense to help support hosting and ongoing writing. Ads should never be
           placed in a way that confuses them with navigation, code examples, or article content.
+        </p>
+        <p>
+          At the moment, frontend ad serving is {ADSENSE_ENABLED ? 'enabled' : 'disabled'} while consent and
+          placement readiness are being reviewed. The current monetization status is documented on the{' '}
+          <Link to="/advertising">Advertising page</Link>.
         </p>
         <p>
           Sponsored posts, paid placements, or affiliate relationships are not currently a core part of the

@@ -66,7 +66,7 @@ export default function Post() {
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
-            code({ node, className, children, ...props }) {
+            code({ className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '');
               const isBlock = match != null;
               if (isBlock) {
@@ -105,6 +105,12 @@ export default function Post() {
           <Link to="/posts" className="article__back-link">
             <ArrowLeft size={18} aria-hidden />
             <span>Back to all posts</span>
+          </Link>
+          <Link to="/about" className="article__back-link">
+            <span>About</span>
+          </Link>
+          <Link to="/advertising" className="article__back-link">
+            <span>Advertising</span>
           </Link>
           <Link to="/privacy" className="article__back-link">
             <span>Privacy Policy</span>

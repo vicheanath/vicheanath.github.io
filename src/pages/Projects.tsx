@@ -130,8 +130,6 @@ export default function Projects() {
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
     fetchProjects()
       .then((data) => {
         if (!cancelled) setProjects(data);

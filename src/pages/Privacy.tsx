@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import { ADSENSE_CLIENT, SITE_NAME, SITE_URL } from '../lib/site';
+import { ADSENSE_CLIENT, ADSENSE_ENABLED, SITE_NAME, SITE_URL } from '../lib/site';
 
 export default function Privacy() {
   return (
@@ -42,11 +42,20 @@ export default function Privacy() {
 
       <section className="page__section">
         <h2>Cookies and advertising</h2>
-        <p>
-          This site uses Google AdSense and may display ads provided by Google or its partners. Third-party
-          vendors, including Google, may use cookies to serve ads based on a visitor&apos;s prior visits to
-          this website or other websites.
-        </p>
+        {ADSENSE_ENABLED ? (
+          <p>
+            This site currently uses Google AdSense and may display ads provided by Google or its partners.
+            Third-party vendors, including Google, may use cookies to serve ads based on a visitor&apos;s prior
+            visits to this website or other websites.
+          </p>
+        ) : (
+          <p>
+            This site is prepared for Google AdSense, but Google ad code is currently disabled while
+            consent tooling and final ad placement review are completed. If ads are enabled later,
+            third-party vendors, including Google, may use cookies to serve ads based on a visitor&apos;s prior
+            visits to this website or other websites.
+          </p>
+        )}
         <p>
           Google&apos;s use of advertising cookies enables it and its partners to serve ads based on your visit
           to this site and other sites on the Internet. You can learn more in{' '}
@@ -76,11 +85,16 @@ export default function Privacy() {
         <h2>AdSense account disclosure</h2>
         <p>
           The publisher account associated with this site is <code>{ADSENSE_CLIENT}</code>. Ads may appear
-          on some pages to help cover hosting and publishing costs.
+          on some pages in the future to help cover hosting and publishing costs, but ad serving is
+          currently {ADSENSE_ENABLED ? 'enabled' : 'disabled'} in the site frontend.
         </p>
         <p>
           This site does not intentionally collect sensitive personal information for advertising purposes,
           and it does not sell private reader information directly.
+        </p>
+        <p>
+          If advertising is re-enabled, the site should not resume Google ad serving in regions that
+          require consent until the appropriate consent flow is in place.
         </p>
       </section>
 
@@ -105,7 +119,8 @@ export default function Privacy() {
         <h2>Contact</h2>
         <p>
           Privacy questions, correction requests, and policy concerns can be sent through the contact
-          options listed on the <Link to="/contact">Contact page</Link>.
+          options listed on the <Link to="/contact">Contact page</Link>. Monetization-specific details are
+          also summarized on the <Link to="/advertising">Advertising page</Link>.
         </p>
       </section>
     </section>

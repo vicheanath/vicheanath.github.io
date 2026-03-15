@@ -9,3 +9,5 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/vicheanath/';
 export const GITHUB_URL = 'https://github.com/vicheanath';
 export const SOURCE_REPO_URL = 'https://github.com/vicheanath/vicheanath.github.io';
 export const ADSENSE_CLIENT = 'ca-pub-3051490042018197';
+export const ADSENSE_PUBLISHER_ID = ADSENSE_CLIENT.replace(/^ca-/, '');
+export const ADSENSE_ENABLED = false;

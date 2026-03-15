@@ -1,5 +1,5 @@
 import { Link, Outlet, NavLink } from 'react-router-dom';
-import { Home, Newspaper, FolderGit2, Github, Mail } from 'lucide-react';
+import { Home, Newspaper, FolderGit2, Github, Mail, CircleUserRound } from 'lucide-react';
 import profileData from '../content/profile.json';
 import { SOURCE_REPO_URL } from '../lib/site';
 
@@ -28,6 +28,10 @@ export default function Layout() {
             <Home size={18} aria-hidden />
             <span>Home</span>
           </NavLink>
+          <NavLink to="/about" className="nav__link">
+            <CircleUserRound size={18} aria-hidden />
+            <span>About</span>
+          </NavLink>
           <NavLink to="/posts" className="nav__link">
             <Newspaper size={18} aria-hidden />
             <span>Posts</span>
@@ -48,6 +52,8 @@ export default function Layout() {
       <footer className="footer">
         <p className="footer__line">{profile.name} · original software notes and project updates</p>
         <div className="footer__links">
+          <Link to="/about">About</Link>
+          <Link to="/advertising">Advertising</Link>
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/publishing-policy">Publishing Policy</Link>
           <Link to="/contact">Contact</Link>
