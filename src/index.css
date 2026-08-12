@@ -1,19 +1,61 @@
-/* Classic newspaper style */
+/* Classic newspaper style, set in Ubuntu */
 :root {
+  color-scheme: light;
+
+  /* Surfaces & ink */
   --paper: #f4f1ea;
+  --surface: rgba(255, 255, 255, 0.42);
   --ink: #1a1a1a;
-  --ink-muted: #444;
+  --ink-muted: #4a463f;
+  --accent: #7c2d18;
+
+  /* Rules & states */
   --rule: #2a2a2a;
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Lora', 'Source Serif Pro', Georgia, serif;
+  --rule-strong: rgba(0, 0, 0, 0.22);
+  --rule-soft: rgba(0, 0, 0, 0.12);
+  --rule-faint: rgba(0, 0, 0, 0.08);
+  --hover: rgba(0, 0, 0, 0.04);
+
+  /* Code */
+  --code-inline-bg: rgba(43, 35, 24, 0.08);
+  --code-inline-border: rgba(43, 35, 24, 0.12);
+  --code-label-bg: #e9dfcf;
+  --code-label-ink: rgba(43, 35, 24, 0.82);
+
+  /* Type */
+  --font-heading: 'Ubuntu', 'Ubuntu Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-body: 'Ubuntu', 'Ubuntu Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'Ubuntu Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
+
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--ink);
   background-color: var(--paper);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark reading mode keeps the same paper/ink relationship, inverted. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #16151a;
+    --surface: rgba(255, 255, 255, 0.04);
+    --ink: #ece8e1;
+    --ink-muted: #a5a09a;
+    --accent: #e0a08a;
+    --rule: #cfc9c0;
+    --rule-strong: rgba(255, 255, 255, 0.24);
+    --rule-soft: rgba(255, 255, 255, 0.14);
+    --rule-faint: rgba(255, 255, 255, 0.08);
+    --hover: rgba(255, 255, 255, 0.06);
+    --code-inline-bg: rgba(255, 255, 255, 0.08);
+    --code-inline-border: rgba(255, 255, 255, 0.12);
+    --code-label-bg: #2b2a30;
+    --code-label-ink: rgba(236, 232, 225, 0.82);
+  }
 }
 
 *,
@@ -93,7 +135,7 @@ a:focus-visible {
 }
 
 .masthead__path {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--ink-muted);
   margin: 0 0 0.35rem;
@@ -113,7 +155,7 @@ a:focus-visible {
   justify-content: center;
   gap: 0.5rem 1.25rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--rule-soft);
 }
 
 .nav__link {
@@ -143,7 +185,7 @@ a:focus-visible {
 .footer {
   margin-top: 3rem;
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: 1px solid var(--rule-soft);
   font-size: 0.85rem;
   color: var(--ink-muted);
   text-align: center;
@@ -181,7 +223,7 @@ a:focus-visible {
 .home__profile {
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid var(--rule-soft);
 }
 
 .home__profile-heading {
@@ -259,8 +301,8 @@ a:focus-visible {
 .home__site-note {
   margin: 1.5rem 0 1.25rem;
   padding: 1rem 1rem 0.9rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
 }
 
 .home__site-links {
@@ -279,7 +321,7 @@ a:focus-visible {
 
 .experience-list__item,
 .education-list__item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--rule-faint);
   padding: 0.75rem 0;
 }
 .experience-list__item:first-child,
@@ -365,7 +407,7 @@ a:focus-visible {
 }
 
 .post-list__item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid var(--rule-soft);
 }
 
 .post-list__item:last-child {
@@ -388,7 +430,7 @@ a:focus-visible {
 }
 
 .post-list__link:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--hover);
   color: var(--ink-muted);
 }
 
@@ -488,7 +530,7 @@ a:focus-visible {
 }
 
 .project-list__item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid var(--rule-soft);
 }
 .project-list__item:last-child {
   border-bottom: none;
@@ -506,7 +548,7 @@ a:focus-visible {
   border-radius: 2px;
 }
 .project-list__link:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--hover);
   color: var(--ink-muted);
 }
 .project-list__link:focus-visible {
@@ -535,7 +577,7 @@ a:focus-visible {
   color: var(--ink-muted);
 }
 .project-list__language {
-  font-family: ui-monospace, Menlo, monospace;
+  font-family: var(--font-mono);
 }
 .project-list__stars {
   display: inline-flex;
@@ -602,8 +644,8 @@ a:focus-visible {
   gap: 0.8rem;
   align-items: flex-start;
   padding: 0.95rem 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.32);
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
   text-decoration: none;
 }
 
@@ -618,7 +660,7 @@ a:focus-visible {
 }
 
 .page__card-link:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--hover);
 }
 
 .page--not-found {
@@ -663,7 +705,7 @@ a:focus-visible {
 .article__header--hero {
   margin-bottom: 2rem;
   padding: 0 0 1.35rem;
-  border-bottom: 3px double rgba(0, 0, 0, 0.22);
+  border-bottom: 3px double var(--rule-strong);
 }
 
 .article__eyebrow {
@@ -701,8 +743,8 @@ a:focus-visible {
   align-items: center;
   gap: 0.4rem;
   padding: 0.35rem 0.65rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
   color: var(--ink-muted);
   font-size: 0.86rem;
 }
@@ -767,7 +809,7 @@ a:focus-visible {
 
 .article__body hr {
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--rule-strong);
   margin: 1.5rem 0;
 }
 
@@ -797,13 +839,13 @@ a:focus-visible {
 .article__body th,
 .article__body td {
   padding: 0.7rem 0.8rem;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--rule-soft);
   text-align: left;
   vertical-align: top;
 }
 
 .article__body th {
-  background: rgba(255, 255, 255, 0.42);
+  background: var(--surface);
   font-family: var(--font-heading);
   font-weight: 700;
 }
@@ -812,13 +854,13 @@ a:focus-visible {
   display: block;
   max-width: 100%;
   margin: 1.25rem auto;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--rule-soft);
 }
 
 .article__footer {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: 1px solid var(--rule-soft);
   font-size: 0.95rem;
 }
 
@@ -861,13 +903,13 @@ a:focus-visible {
 
 /* Inline code */
 .article__body code {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.88em;
   line-height: inherit;
-  background: rgba(43, 35, 24, 0.08);
+  background: var(--code-inline-bg);
   padding: 0.12rem 0.38rem;
   border-radius: 4px;
-  border: 1px solid rgba(43, 35, 24, 0.12);
+  border: 1px solid var(--code-inline-border);
 }
 .article__body p > code,
 .article__body li > code {
@@ -879,26 +921,26 @@ a:focus-visible {
 .article__body .article__code-block {
   margin: 1.35rem 0;
   padding: 0;
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-family: var(--font-mono);
 }
 .article__code-block {
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--rule-soft);
   background: #232323;
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px var(--rule-faint);
 }
 .article__code-label,
 .article__diagram-label {
   display: block;
   padding: 0.5rem 0.85rem;
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(43, 35, 24, 0.82);
-  background: #e9dfcf;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: var(--code-label-ink);
+  background: var(--code-label-bg);
+  border-bottom: 1px solid var(--rule-soft);
 }
 .article__code-surface {
   overflow-x: auto;
@@ -926,8 +968,8 @@ a:focus-visible {
 
 .article__mermaid {
   margin: 1.35rem 0;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
 }
 
 .article__mermaid-canvas {
@@ -958,8 +1000,8 @@ a:focus-visible {
   margin: 1rem;
   white-space: pre-wrap;
   word-break: break-word;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--hover);
+  border: 1px solid var(--rule-faint);
   padding: 0.9rem;
   overflow-x: auto;
 }
@@ -994,5 +1036,183 @@ a:focus-visible {
 
   .page__card-link {
     padding: 0.9rem;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Reading & interaction polish
+   --------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Ubuntu sits tighter than the old serif: balance headings, ease measure */
+.masthead__title,
+.article__title,
+.page__title,
+.post-list__title,
+.project-list__name,
+.home__profile-name {
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.article__excerpt,
+.post-list__excerpt,
+.page__intro,
+.home__intro {
+  text-wrap: pretty;
+}
+
+.masthead__tagline,
+.article__eyebrow,
+.page__eyebrow {
+  font-style: normal;
+}
+
+/* Navigation: larger tap targets and a clearer active state */
+.nav__link {
+  padding: 0.4rem 0.2rem;
+  position: relative;
+}
+.nav__link.active {
+  text-decoration: none;
+  color: var(--ink);
+}
+.nav__link.active::after {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  right: 0.2rem;
+  bottom: 0.05rem;
+  height: 2px;
+  background: var(--accent);
+}
+
+/* One focus treatment everywhere */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.post-list__link:hover,
+.project-list__link:hover {
+  color: var(--ink);
+}
+
+/* Article body */
+.article__body {
+  overflow-wrap: break-word;
+}
+
+.article__body h2,
+.article__body h3 {
+  scroll-margin-top: 1.5rem;
+  text-wrap: balance;
+}
+
+.article__body h2 {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule-faint);
+}
+
+.article__body h2:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Wide tables scroll instead of pushing the page sideways */
+.article__body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Code block header with a copy control */
+.article__code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--code-label-bg);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.article__code-head .article__code-label {
+  border-bottom: none;
+  background: none;
+}
+
+.article__code-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0.5rem;
+  padding: 0.3rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--code-label-ink);
+  background: transparent;
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.article__code-copy:hover {
+  background: var(--hover);
+}
+.article__code-copy[data-copied='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Diagrams keep a light canvas so mermaid's palette stays readable */
+.article__mermaid-canvas {
+  background: #fbfaf6;
+}
+
+/* Printing an article should give clean paper */
+@media print {
+  .masthead,
+  .nav,
+  .footer,
+  .article__crumb,
+  .article__actions,
+  .skip-link,
+  .article__code-copy {
+    display: none !important;
+  }
+  .layout {
+    max-width: none;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
   }
 }

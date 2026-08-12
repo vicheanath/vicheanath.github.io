@@ -6,7 +6,6 @@ import Post from './pages/Post';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import About from './pages/About';
-import Advertising from './pages/Advertising';
 import Privacy from './pages/Privacy';
 import PublishingPolicy from './pages/PublishingPolicy';
 import NotFound from './pages/NotFound';
@@ -27,7 +26,6 @@ export const routes: RouteObject[] = [
       { path: 'post/:slug', element: <Post /> },
       { path: 'projects', element: <Projects /> },
       { path: 'contact', element: <Contact /> },
-      { path: 'advertising', element: <Advertising /> },
       { path: 'privacy', element: <Privacy /> },
       { path: 'publishing-policy', element: <PublishingPolicy /> },
       { path: '*', element: <NotFound /> },

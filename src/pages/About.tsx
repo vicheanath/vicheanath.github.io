@@ -72,14 +72,12 @@ export default function About() {
         <h2>What readers should expect</h2>
         <p>
           Articles are intended to be original, readable, and specific enough to help working engineers.
-          The site is not a guest-post marketplace, a republishing network, or a collection of thin pages
-          created only to host ads.
+          The site is not a guest-post marketplace, a republishing network, or a collection of thin pages.
         </p>
         <p>
           When content needs correction or clarification, it should be updated. Site-wide disclosures are
-          kept in the <Link to="/privacy">Privacy Policy</Link>,{' '}
-          <Link to="/publishing-policy">Publishing Policy</Link>, and{' '}
-          <Link to="/advertising">Advertising page</Link>.
+          kept in the <Link to="/privacy">Privacy Policy</Link> and the{' '}
+          <Link to="/publishing-policy">Publishing Policy</Link>.
         </p>
       </section>
 

@@ -79,10 +79,9 @@ export default function Contact() {
       <section className="page__section">
         <h2>Policies</h2>
         <p>
-          For advertising, cookies, and data handling details, read the <Link to="/privacy">Privacy Policy</Link>.
+          For cookies and data handling details, read the <Link to="/privacy">Privacy Policy</Link>.
           For how content is written, corrected, and disclosed, read the{' '}
-          <Link to="/publishing-policy">Publishing Policy</Link>. For monetization and ad placement
-          standards, read the <Link to="/advertising">Advertising page</Link>.
+          <Link to="/publishing-policy">Publishing Policy</Link>.
         </p>
         <p className="page__muted">{DEFAULT_DESCRIPTION}</p>
       </section>

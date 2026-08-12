@@ -30,7 +30,12 @@ export async function render(url: string): Promise<RenderResult> {
   const router = createStaticRouter(handler.dataRoutes, context);
 
   beginHeadCapture();
-  const html = renderToString(<StaticRouterProvider router={router} context={context} />);
+  // hydrate={false}: no loaders are used, and the hydration-data <script> it
+  // would inject into the root has no counterpart in the client render, which
+  // would fail hydration on every page.
+  const html = renderToString(
+    <StaticRouterProvider router={router} context={context} hydrate={false} />
+  );
   const head = takeHead() ?? {
     title: SITE_NAME,
     description: DEFAULT_DESCRIPTION,

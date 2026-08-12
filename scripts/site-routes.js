@@ -19,7 +19,6 @@ export const staticRoutes = [
   { path: 'posts', priority: '0.9', changefreq: 'weekly' },
   { path: 'projects', priority: '0.8', changefreq: 'weekly' },
   { path: 'contact', priority: '0.7', changefreq: 'monthly' },
-  { path: 'advertising', priority: '0.5', changefreq: 'yearly' },
   { path: 'privacy', priority: '0.4', changefreq: 'yearly' },
   { path: 'publishing-policy', priority: '0.5', changefreq: 'yearly' },
 ];

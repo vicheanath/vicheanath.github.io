@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import { ADSENSE_ENABLED, SITE_NAME, SITE_URL } from '../lib/site';
+import { SITE_NAME, SITE_URL } from '../lib/site';
 
 export default function PublishingPolicy() {
   return (
@@ -14,7 +14,7 @@ export default function PublishingPolicy() {
           '@type': 'WebPage',
           name: `Publishing Policy - ${SITE_NAME}`,
           url: `${SITE_URL}/publishing-policy`,
-          description: 'Editorial and monetization policy for the blog.',
+          description: 'Editorial policy for the blog.',
         }}
       />
 
@@ -23,7 +23,7 @@ export default function PublishingPolicy() {
         <h1 className="page__title">Publishing Policy</h1>
         <p className="page__intro">
           This site exists to publish practical, readable software notes with clear ownership and honest
-          disclosures. The goal is to keep the blog useful for readers and trustworthy for advertisers.
+          disclosures. The goal is simply to keep the blog useful for the people who read it.
         </p>
       </header>
 
@@ -35,8 +35,7 @@ export default function PublishingPolicy() {
           ongoing study, or direct experimentation.
         </p>
         <p>
-          The site does not publish spun articles, scraped material, or placeholder pages designed only to
-          show ads.
+          The site does not publish spun articles, scraped material, or placeholder pages.
         </p>
       </section>
 
@@ -58,19 +57,11 @@ export default function PublishingPolicy() {
       </section>
 
       <section className="page__section">
-        <h2>Monetization and disclosures</h2>
+        <h2>No advertising or sponsorship</h2>
         <p>
-          This site may use Google AdSense to help support hosting and ongoing writing. Ads should never be
-          placed in a way that confuses them with navigation, code examples, or article content.
-        </p>
-        <p>
-          At the moment, frontend ad serving is {ADSENSE_ENABLED ? 'enabled' : 'disabled'} while consent and
-          placement readiness are being reviewed. The current monetization status is documented on the{' '}
-          <Link to="/advertising">Advertising page</Link>.
-        </p>
-        <p>
-          Sponsored posts, paid placements, or affiliate relationships are not currently a core part of the
-          site. If that changes, the relevant page or article should include a clear disclosure.
+          This is a personal, non-commercial blog. It carries no advertising, no sponsored posts, no paid
+          placements, and no affiliate links. If that ever changes, the relevant page or article will
+          carry a clear disclosure.
         </p>
       </section>
 

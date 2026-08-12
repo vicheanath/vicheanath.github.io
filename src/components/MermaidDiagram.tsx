@@ -23,7 +23,7 @@ function loadMermaid() {
           lineColor: '#2a2a2a',
           secondaryColor: '#f4f1ea',
           tertiaryColor: '#ffffff',
-          fontFamily: 'Lora, Georgia, serif',
+          fontFamily: "'Ubuntu', 'Segoe UI', Helvetica, Arial, sans-serif",
         },
         flowchart: {
           curve: 'basis',

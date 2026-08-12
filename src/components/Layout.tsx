@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import { Link, Outlet, NavLink } from 'react-router-dom';
 import { Home, Newspaper, FolderGit2, Github, Mail, CircleUserRound } from 'lucide-react';
 import profileData from '../content/profile.json';
 import { SOURCE_REPO_URL } from '../lib/site';
 
 const profile = profileData as { name: string };
+
+/** Never re-subscribes: the masthead date only needs to resolve once, on mount. */
+function subscribe() {
+  return () => {};
+}
 
 function formatToday() {
   return new Date().toLocaleDateString('en-US', {
@@ -16,13 +21,9 @@ function formatToday() {
 }
 
 export default function Layout() {
-  // Filled in after mount: the prerendered HTML would otherwise freeze the
-  // build date into the page and break hydration on every later visit.
-  const [today, setToday] = useState('');
-
-  useEffect(() => {
-    setToday(formatToday());
-  }, []);
+  // Resolved in the browser: the prerendered HTML would otherwise freeze the
+  // build date into the page. The null server snapshot keeps hydration clean.
+  const today = useSyncExternalStore(subscribe, formatToday, () => null);
 
   return (
     <div className="layout">
@@ -33,7 +34,7 @@ export default function Layout() {
         <h1 className="masthead__title">{profile.name}</h1>
         <p className="masthead__tagline">Personal bulletins &amp; occasional notes</p>
         <p className="masthead__path" aria-hidden>~/blog</p>
-        <p className="masthead__date">{today || ' '}</p>
+        <p className="masthead__date">{today}</p>
         <nav className="nav" aria-label="Main">
           <NavLink to="/" className="nav__link" end>
             <Home size={18} aria-hidden />
@@ -64,7 +65,6 @@ export default function Layout() {
         <p className="footer__line">{profile.name} · original software notes and project updates</p>
         <div className="footer__links">
           <Link to="/about">About</Link>
-          <Link to="/advertising">Advertising</Link>
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/publishing-policy">Publishing Policy</Link>
           <Link to="/contact">Contact</Link>

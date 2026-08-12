@@ -141,7 +141,6 @@ export default function Home() {
           <div className="home__site-links">
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
-            <Link to="/advertising">Advertising</Link>
             <Link to="/privacy">Privacy Policy</Link>
             <Link to="/publishing-policy">Publishing Policy</Link>
           </div>

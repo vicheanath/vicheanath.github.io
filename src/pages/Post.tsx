@@ -1,10 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ArrowLeft, CalendarDays, Clock3, FileX, NotebookPen } from 'lucide-react';
 import Seo from '../components/Seo';
+import CodeBlock from '../components/CodeBlock';
 import MermaidDiagram from '../components/MermaidDiagram';
 import { getPostBySlug } from '../lib/posts';
 import { SITE_NAME, SITE_URL } from '../lib/site';
@@ -148,37 +147,7 @@ export default function Post() {
               }
 
               if (isBlock) {
-                return (
-                  <figure className="article__code-block">
-                    <figcaption className="article__code-label">{language}</figcaption>
-                    <div className="article__code-surface">
-                      <SyntaxHighlighter
-                        style={oneDark}
-                        language={language === 'text' ? undefined : language}
-                        PreTag="div"
-                        customStyle={{
-                          margin: 0,
-                          padding: '1rem 1.1rem',
-                          borderRadius: 0,
-                          border: 'none',
-                          background: 'transparent',
-                        }}
-                        codeTagProps={{
-                          style: {
-                            display: 'block',
-                            fontSize: '0.92rem',
-                            lineHeight: 1.65,
-                            padding: 0,
-                            minWidth: 'max-content',
-                          },
-                        }}
-                        showLineNumbers={false}
-                      >
-                        {source}
-                      </SyntaxHighlighter>
-                    </div>
-                  </figure>
-                );
+                return <CodeBlock language={language} source={source} />;
               }
 
               return (
@@ -195,8 +164,8 @@ export default function Post() {
 
       <footer className="article__footer">
         <p className="article__byline">
-          Written by {SITE_NAME}. For privacy, advertising, and publishing disclosures, see the site
-          policies linked below.
+          Written by {SITE_NAME}. For privacy and publishing disclosures, see the site policies linked
+          below.
         </p>
         <div className="article__actions">
           <Link to="/posts" className="article__back-link">
@@ -205,9 +174,6 @@ export default function Post() {
           </Link>
           <Link to="/about" className="article__back-link">
             <span>About</span>
-          </Link>
-          <Link to="/advertising" className="article__back-link">
-            <span>Advertising</span>
           </Link>
           <Link to="/privacy" className="article__back-link">
             <span>Privacy Policy</span>
