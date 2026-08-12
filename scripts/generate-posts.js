@@ -18,6 +18,30 @@ const files = fs.readdirSync(postsDir, { withFileTypes: true })
   .filter((d) => d.isFile() && d.name.endsWith('.md'))
   .map((d) => d.name);
 
+/** ".NET" -> "dotnet", "ASP.NET Core" -> "aspnet-core". */
+function slugifyTag(name) {
+  return String(name)
+    .toLowerCase()
+    .replace(/^\./, 'dot')
+    .replace(/\./g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function readTags(value) {
+  const list = Array.isArray(value)
+    ? value
+    : typeof value === 'string'
+      ? value.split(',')
+      : [];
+
+  return list
+    .map((name) => String(name).trim())
+    .filter(Boolean)
+    .map((name) => ({ name, slug: slugifyTag(name) }))
+    .filter((tag) => tag.slug.length > 0);
+}
+
 const posts = files.map((name) => {
   const raw = fs.readFileSync(path.join(postsDir, name), 'utf-8');
   const { data, content } = matter(raw);
@@ -27,6 +51,7 @@ const posts = files.map((name) => {
     title: data.title ?? slug,
     date: data.date ?? '',
     excerpt: data.excerpt ?? '',
+    tags: readTags(data.tags),
     body: content,
   };
 });

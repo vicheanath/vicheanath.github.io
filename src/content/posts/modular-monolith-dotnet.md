@@ -2,6 +2,7 @@
 title: "When a Modular Monolith Beats Microservices in .NET"
 date: 2025-03-05
 excerpt: "Why many .NET teams move faster with a modular monolith first, and how to structure modules so the codebase stays clean as the product grows."
+tags: [".NET", "Architecture", "Modular Monolith"]
 ---
 
 Microservices solve real problems, but they also introduce many of their own: network boundaries, distributed tracing, deployment coordination, duplicated infrastructure, and cross-service consistency concerns. For many .NET teams, a **modular monolith** is the better default because it preserves strong boundaries without paying distributed-systems cost too early.

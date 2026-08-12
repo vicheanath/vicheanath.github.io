@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Github, Linkedin } from 'lucide-react';
 import Seo from '../components/Seo';
 import profileData from '../content/profile.json';
-import { GITHUB_URL, SITE_NAME, SITE_URL, SOURCE_REPO_URL } from '../lib/site';
+import { GITHUB_URL, SITE_NAME, SOURCE_REPO_URL, canonicalUrl } from '../lib/site';
 
 const profile = profileData as {
   name: string;
@@ -25,7 +25,7 @@ export default function About() {
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
             name: `About - ${SITE_NAME}`,
-            url: `${SITE_URL}/about`,
+            url: canonicalUrl('about'),
             description: 'Publisher and site information for the blog.',
           },
           {
@@ -38,7 +38,7 @@ export default function About() {
               name: profile.location,
             },
             sameAs: [profile.linkedInUrl, GITHUB_URL],
-            url: SITE_URL,
+            url: canonicalUrl(),
           },
         ]}
       />

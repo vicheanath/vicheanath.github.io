@@ -2,6 +2,7 @@
 title: "Caching Strategies for High-Traffic .NET Applications"
 date: 2025-03-02
 excerpt: "How to use in-memory and distributed caching in .NET without serving stale data blindly or hiding deeper design problems."
+tags: [".NET", "Caching", "Performance"]
 ---
 
 Caching is one of the most useful tools for improving performance in .NET systems, but it is also one of the easiest to misuse. A cache can reduce database load and improve response times, or it can create confusing stale-data bugs that are hard to diagnose. The difference usually comes down to choosing the right cache boundary and invalidation approach.

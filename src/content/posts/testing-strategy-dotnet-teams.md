@@ -2,6 +2,7 @@
 title: "A Testing Strategy for .NET Teams"
 date: 2025-03-07
 excerpt: "How to balance unit, integration, and end-to-end tests in .NET so teams catch regressions without creating a brittle test suite."
+tags: [".NET", "Testing", "Team Practices"]
 ---
 
 Teams rarely struggle because they have no tests at all. More often, they struggle because their tests do not match the risks in the system. They have many unit tests around low-value code, too few integration tests around real failure points, and end-to-end tests that are expensive to maintain.

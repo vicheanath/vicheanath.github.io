@@ -2,6 +2,7 @@
 title: "Async and Await Best Practices in .NET"
 date: 2025-03-09
 excerpt: "How to use async and await in .NET without creating hidden deadlocks, thread starvation, or unnecessarily complicated code."
+tags: [".NET", "Async", "Performance"]
 ---
 
 `async` and `await` make .NET code easier to read, but they do not remove concurrency problems. Many production issues in .NET systems come from mixing synchronous and asynchronous code, blocking threads unnecessarily, or starting work without a clear ownership model.

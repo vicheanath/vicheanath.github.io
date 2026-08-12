@@ -2,6 +2,7 @@
 title: "Observability in .NET with OpenTelemetry"
 date: 2025-03-04
 excerpt: "How to make .NET services easier to operate with logs, metrics, and traces that explain what the system is doing under real production load."
+tags: [".NET", "Observability", "OpenTelemetry"]
 ---
 
 When a .NET system slows down or starts failing, the first question is rarely "what code changed?" The first question is "what is happening right now?" Observability is how teams answer that quickly. Without it, outages become guesswork and blame shifts between APIs, databases, and downstream services.

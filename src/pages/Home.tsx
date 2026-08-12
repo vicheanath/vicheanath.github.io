@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Newspaper, Calendar, ChevronRight, Inbox, Linkedin, Briefcase, GraduationCap } from 'lucide-react';
+import { Newspaper, Linkedin, Briefcase, GraduationCap, ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
+import PostList from '../components/PostList';
 import { getAllPosts } from '../lib/posts';
 import profileData from '../content/profile.json';
-import { DEFAULT_DESCRIPTION, GITHUB_URL, SITE_URL } from '../lib/site';
+import { DEFAULT_DESCRIPTION, GITHUB_URL, canonicalUrl } from '../lib/site';
 
 interface ExperienceItem {
   title: string;
@@ -47,7 +48,7 @@ export default function Home() {
             '@context': 'https://schema.org',
             '@type': 'WebSite',
             name: profile.name,
-            url: SITE_URL,
+            url: canonicalUrl(),
             description: profile.about ?? DEFAULT_DESCRIPTION,
             inLanguage: 'en-US',
           },
@@ -61,7 +62,7 @@ export default function Home() {
               name: profile.location,
             },
             sameAs: [profile.linkedInUrl, GITHUB_URL],
-            url: SITE_URL,
+            url: canonicalUrl(),
           },
         ]}
       />
@@ -160,30 +161,18 @@ export default function Home() {
       <h2 className="home__heading">
         <Newspaper size={22} aria-hidden />
         <span>Latest bulletins</span>
+        <span className="home__count">{posts.length}</span>
       </h2>
-      {posts.length === 0 ? (
-        <div className="home__empty">
-          <Inbox size={48} aria-hidden />
-          <p>No bulletins yet. Check back soon.</p>
-        </div>
-      ) : (
-        <ul className="post-list">
-          {posts.map((post) => (
-            <li key={post.slug} className="post-list__item">
-              <Link to={`/post/${post.slug}`} className="post-list__link">
-                <span className="post-list__content">
-                  <span className="post-list__title">{post.title}</span>
-                  <time className="post-list__date" dateTime={post.date}>
-                    <Calendar size={14} aria-hidden />
-                    {post.date}
-                  </time>
-                  <p className="post-list__excerpt">{post.excerpt}</p>
-                </span>
-                <ChevronRight size={20} className="post-list__chevron" aria-hidden />
-              </Link>
-            </li>
-          ))}
-        </ul>
+
+      <PostList posts={posts.slice(0, 6)} emptyMessage="No bulletins yet. Check back soon." />
+
+      {posts.length > 6 && (
+        <p className="home__more">
+          <Link to="/posts" className="article__back-link">
+            <span>Browse all {posts.length} posts</span>
+            <ArrowRight size={18} aria-hidden />
+          </Link>
+        </p>
       )}
     </section>
   );

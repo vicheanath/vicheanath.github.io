@@ -2,6 +2,7 @@
 title: "EF Core Performance Checklist for Production"
 date: 2025-03-08
 excerpt: "A practical EF Core checklist for reducing slow queries, oversized object graphs, and unnecessary database work in production systems."
+tags: ["EF Core", "Performance", "Databases"]
 ---
 
 Entity Framework Core is productive, but productivity can hide expensive defaults. Many slow .NET applications are not suffering from a lack of hardware. They are suffering from overly broad queries, unnecessary tracking, and data access patterns that look fine in development but fall apart at scale.

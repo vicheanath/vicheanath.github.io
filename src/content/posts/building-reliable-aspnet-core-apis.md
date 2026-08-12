@@ -2,6 +2,7 @@
 title: "Building Reliable ASP.NET Core APIs"
 date: 2025-03-10
 excerpt: "A practical guide to building ASP.NET Core APIs that stay predictable under load, handle failures well, and remain easy to change."
+tags: ["ASP.NET Core", "APIs", "Reliability"]
 ---
 
 Shipping an API is easy. Operating an API that stays understandable and dependable six months later is the harder engineering problem. In ASP.NET Core, reliability usually comes from boring decisions repeated consistently: clear contracts, small endpoints, defensive validation, observable failures, and safe defaults around timeouts and retries.

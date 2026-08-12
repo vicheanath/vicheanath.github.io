@@ -2,6 +2,7 @@
 title: "Refactoring Legacy .NET Systems Without Stopping Delivery"
 date: 2025-03-01
 excerpt: "A pragmatic approach to improving legacy .NET systems while still shipping features, reducing risk through seams, tests, and incremental change."
+tags: [".NET", "Refactoring", "Legacy Code"]
 ---
 
 Most legacy .NET systems are not failing because they were written badly by bad engineers. They are failing because they have survived many business demands, deadline compromises, and architectural eras. The challenge is rarely to rewrite them perfectly. The challenge is to make them safer to change while the business still needs new features.

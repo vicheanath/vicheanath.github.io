@@ -4,7 +4,7 @@
  */
 import fs from 'fs';
 import path from 'path';
-import { SITE_URL, escapeXml, loadPosts, projectRoot } from './site-routes.js';
+import { SITE_URL, canonicalUrl, escapeXml, loadPosts, projectRoot } from './site-routes.js';
 
 const distDir = path.join(projectRoot, 'dist');
 const feedPath = path.join(distDir, 'rss.xml');
@@ -27,13 +27,17 @@ const posts = loadPosts().filter((post) => typeof post?.slug === 'string' && pos
 
 const items = posts
   .map((post) => {
-    const url = `${SITE_URL}/post/${post.slug}`;
+    const url = canonicalUrl(`post/${post.slug}`);
+    const categories = (post.tags ?? [])
+      .map((tag) => `
+      <category>${escapeXml(tag.name)}</category>`)
+      .join('');
     return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${escapeXml(url)}</link>
       <guid isPermaLink="true">${escapeXml(url)}</guid>
       <pubDate>${rfc822(post.date)}</pubDate>
-      <description>${escapeXml(post.excerpt ?? '')}</description>
+      <description>${escapeXml(post.excerpt ?? '')}</description>${categories}
     </item>`;
   })
   .join('\n');

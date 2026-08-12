@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION } from '../lib/site';
+import { SITE_NAME, DEFAULT_DESCRIPTION, canonicalUrl } from '../lib/site';
 import { collectHead } from '../lib/head';
 
 interface SeoProps {
@@ -65,7 +65,7 @@ export default function Seo({
   noindex = false,
   jsonLd,
 }: SeoProps) {
-  const url = path ? `${SITE_URL}/${path}` : SITE_URL;
+  const url = canonicalUrl(path);
   const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 
   if (import.meta.env.SSR) {

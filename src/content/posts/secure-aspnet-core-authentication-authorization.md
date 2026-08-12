@@ -2,6 +2,7 @@
 title: "Securing ASP.NET Core APIs with Authentication and Authorization"
 date: 2025-03-03
 excerpt: "A practical approach to securing ASP.NET Core APIs with clear identity boundaries, policy-based authorization, and safer defaults."
+tags: ["ASP.NET Core", "Security", "APIs"]
 ---
 
 Security problems in APIs often come from design shortcuts rather than missing libraries. A team may add JWT authentication and still end up with weak authorization, overly broad permissions, or inconsistent protection across endpoints. In ASP.NET Core, the goal should be simple: identify callers clearly, authorize actions explicitly, and make unsafe paths hard to create by accident.

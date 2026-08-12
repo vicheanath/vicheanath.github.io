@@ -39,15 +39,41 @@ export function loadPosts() {
   }
 }
 
+/** Absolute canonical URL for a route path (mirrors src/lib/site.ts). */
+export function canonicalUrl(routePath = '') {
+  const clean = String(routePath).replace(/^\/+|\/+$/g, '');
+  return clean ? `${SITE_URL}/${clean}/` : `${SITE_URL}/`;
+}
+
 export function postRoutes(posts = loadPosts()) {
   return posts
     .filter((post) => typeof post?.slug === 'string' && post.slug.trim().length > 0)
     .map((post) => ({ path: `post/${post.slug}`, priority: '0.7', changefreq: 'monthly', post }));
 }
 
+/** Distinct tags across all posts, each becoming its own static page. */
+export function tagRoutes(posts = loadPosts()) {
+  const seen = new Map();
+
+  for (const post of posts) {
+    for (const tag of post?.tags ?? []) {
+      if (tag?.slug && !seen.has(tag.slug)) {
+        seen.set(tag.slug, {
+          path: `tag/${tag.slug}`,
+          priority: '0.6',
+          changefreq: 'weekly',
+        });
+      }
+    }
+  }
+
+  return [...seen.values()];
+}
+
 /** Every route that should become a static HTML file. */
 export function allRoutes() {
-  return [...staticRoutes, ...postRoutes()];
+  const posts = loadPosts();
+  return [...staticRoutes, ...postRoutes(posts), ...tagRoutes(posts)];
 }
 
 export function escapeXml(value) {

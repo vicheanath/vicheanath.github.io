@@ -2,6 +2,7 @@
 title: "Domain-Driven Design and Clean Architecture in .NET Core"
 date: 2025-02-20
 excerpt: "A deep dive into DDD tactical patterns, Clean Architecture layers, and how to implement them in .NET Core with a clear dependency rule."
+tags: [".NET", "DDD", "Architecture"]
 ---
 
 Building maintainable .NET Core applications often comes down to how we structure the problem space and the code. **Domain-Driven Design (DDD)** and **Clean Architecture** give us a shared vocabulary and a clear place for every concern. This post goes into the tactical patterns, the dependency rule, and a concrete way to map them onto a .NET Core solution.

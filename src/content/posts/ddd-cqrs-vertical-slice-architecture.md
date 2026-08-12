@@ -2,6 +2,7 @@
 title: "DDD, CQRS, and Vertical Slice Architecture"
 date: 2025-02-20
 excerpt: "Low-context structure for features: one slice per use case, CQRS, and a thin domain. Easy for humans and AI to navigate and implement."
+tags: ["DDD", "CQRS", "Architecture"]
 ---
 
 **Vertical Slice Architecture** organizes code by *feature* (or use case), not by technical layer. Each slice is a small, self-contained vertical: one folder, one command or query, one handler, and only the domain types it needs. Combined with **CQRS** (separate read and write paths) and a **thin DDD** core, you get low context per file and a structure that is easy for an AI agent (or a new developer) to implement one slice at a time.

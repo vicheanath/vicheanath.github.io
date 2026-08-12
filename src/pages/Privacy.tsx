@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import { SITE_NAME, SITE_URL } from '../lib/site';
+import { SITE_NAME, canonicalUrl } from '../lib/site';
 
 export default function Privacy() {
   return (
@@ -13,7 +13,7 @@ export default function Privacy() {
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: `Privacy Policy - ${SITE_NAME}`,
-          url: `${SITE_URL}/privacy`,
+          url: canonicalUrl('privacy'),
           description: 'Privacy policy for this personal blog.',
         }}
       />

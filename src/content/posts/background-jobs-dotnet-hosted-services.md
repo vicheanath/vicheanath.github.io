@@ -2,6 +2,7 @@
 title: "Background Jobs in .NET with Hosted Services"
 date: 2025-03-06
 excerpt: "How to implement background processing in .NET with hosted services without turning your web app into an unreliable job runner."
+tags: [".NET", "Background Jobs", "Reliability"]
 ---
 
 Background work shows up quickly in real systems: sending email, syncing data, generating reports, cleaning expired records, or processing queue messages. .NET gives us `IHostedService` and `BackgroundService` to handle this, but the hard part is not starting a loop. The hard part is owning execution, retries, shutdown, and visibility.

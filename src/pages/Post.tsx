@@ -1,39 +1,17 @@
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { ArrowLeft, CalendarDays, Clock3, FileX, NotebookPen } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Clock3, FileX, NotebookPen, Tag as TagIcon } from 'lucide-react';
 import Seo from '../components/Seo';
 import CodeBlock from '../components/CodeBlock';
 import MermaidDiagram from '../components/MermaidDiagram';
-import { getPostBySlug } from '../lib/posts';
-import { SITE_NAME, SITE_URL } from '../lib/site';
-
-function formatPostDate(date: string) {
-  const parsed = new Date(date);
-
-  if (Number.isNaN(parsed.getTime())) {
-    return date;
-  }
-
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'UTC',
-  }).format(parsed);
-}
-
-function countWords(body: string) {
-  return body
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/`[^`]+`/g, ' ')
-    .split(/\s+/)
-    .filter(Boolean).length;
-}
-
-function getReadingTimeMinutes(body: string) {
-  return Math.max(1, Math.round(countWords(body) / 220));
-}
+import {
+  countWords,
+  formatPostDate,
+  getPostBySlug,
+  getReadingTimeMinutes,
+} from '../lib/posts';
+import { SITE_NAME, canonicalUrl } from '../lib/site';
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
@@ -86,20 +64,21 @@ export default function Post() {
               '@type': 'Person',
               name: SITE_NAME,
             },
-            mainEntityOfPage: `${SITE_URL}/post/${post.slug}`,
-            url: `${SITE_URL}/post/${post.slug}`,
+            keywords: post.tags.map((tag) => tag.name).join(', '),
+            mainEntityOfPage: canonicalUrl(`post/${post.slug}`),
+            url: canonicalUrl(`post/${post.slug}`),
           },
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-              { '@type': 'ListItem', position: 2, name: 'Posts', item: `${SITE_URL}/posts` },
+              { '@type': 'ListItem', position: 1, name: 'Home', item: canonicalUrl() },
+              { '@type': 'ListItem', position: 2, name: 'Posts', item: canonicalUrl('posts') },
               {
                 '@type': 'ListItem',
                 position: 3,
                 name: post.title,
-                item: `${SITE_URL}/post/${post.slug}`,
+                item: canonicalUrl(`post/${post.slug}`),
               },
             ],
           },
@@ -130,6 +109,16 @@ export default function Post() {
             <span>Original article by {SITE_NAME}</span>
           </span>
         </div>
+        {post.tags.length > 0 && (
+          <nav className="tag-row tag-row--article" aria-label="Post tags">
+            <TagIcon size={15} aria-hidden className="tag-row__icon" />
+            {post.tags.map((tag) => (
+              <Link key={tag.slug} to={`/tag/${tag.slug}`} className="tag">
+                {tag.name}
+              </Link>
+            ))}
+          </nav>
+        )}
       </header>
 
       <div className="article__body">

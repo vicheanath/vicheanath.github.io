@@ -1,6 +1,15 @@
 /** Base URL for canonical and Open Graph URLs. */
 export const SITE_URL = 'https://vicheanath.github.io';
 
+/**
+ * Canonical URL for a route. Static hosts serve `posts/index.html` for
+ * `/posts/`, so canonical links carry the trailing slash the host settles on.
+ */
+export function canonicalUrl(path = ''): string {
+  const clean = path.replace(/^\/+|\/+$/g, '');
+  return clean ? `${SITE_URL}/${clean}/` : `${SITE_URL}/`;
+}
+
 export const SITE_NAME = 'Vichea Nath';
 export const SITE_TAGLINE = 'Personal bulletins and occasional notes';
 export const DEFAULT_DESCRIPTION =

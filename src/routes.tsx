@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
 import Post from './pages/Post';
+import TagPage from './pages/Tag';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import About from './pages/About';
@@ -24,6 +25,7 @@ export const routes: RouteObject[] = [
       { path: 'about', element: <About /> },
       { path: 'posts', element: <Posts /> },
       { path: 'post/:slug', element: <Post /> },
+      { path: 'tag/:slug', element: <TagPage /> },
       { path: 'projects', element: <Projects /> },
       { path: 'contact', element: <Contact /> },
       { path: 'privacy', element: <Privacy /> },

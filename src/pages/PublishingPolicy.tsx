@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
-import { SITE_NAME, SITE_URL } from '../lib/site';
+import { SITE_NAME, canonicalUrl } from '../lib/site';
 
 export default function PublishingPolicy() {
   return (
@@ -13,7 +13,7 @@ export default function PublishingPolicy() {
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: `Publishing Policy - ${SITE_NAME}`,
-          url: `${SITE_URL}/publishing-policy`,
+          url: canonicalUrl('publishing-policy'),
           description: 'Editorial policy for the blog.',
         }}
       />

@@ -2,6 +2,7 @@
 title: "CQRS in .NET Core with Clean Architecture"
 date: 2025-02-19
 excerpt: "A deep dive into CQRS: when to use it, how to implement commands and queries, read models, and how it fits with DDD and Clean Architecture."
+tags: [".NET", "CQRS", "Architecture"]
 ---
 
 **CQRS** — Command Query Responsibility Segregation — means splitting the model and the code paths for *writing* (commands) from *reading* (queries). In a .NET Core solution that already follows Clean Architecture and DDD, CQRS fits naturally into the **Application** layer. This post goes deeper: when CQRS pays off, how to structure commands and queries, how to handle read models, and how to keep the domain at the centre.

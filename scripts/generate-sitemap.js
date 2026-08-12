@@ -5,8 +5,8 @@
 import fs from 'fs';
 import path from 'path';
 import {
-  SITE_URL,
   allRoutes,
+  canonicalUrl,
   escapeXml,
   isoDate,
   projectRoot,
@@ -23,7 +23,7 @@ if (!fs.existsSync(distDir)) {
 const today = new Date().toISOString().slice(0, 10);
 
 const urls = allRoutes().map((route) => ({
-  loc: `${SITE_URL}/${route.path}`,
+  loc: canonicalUrl(route.path),
   lastmod: route.post ? isoDate(route.post.date) : today,
   changefreq: route.changefreq,
   priority: route.priority,
