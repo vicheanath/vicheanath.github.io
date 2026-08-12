@@ -25,3 +25,6 @@ dist-ssr
 
 # Build-time generated data (from markdown)
 src/generated/
+
+# Prerender (SSR) bundle
+.ssr-dist

@@ -24,14 +24,16 @@ function formatPostDate(date: string) {
   }).format(parsed);
 }
 
-function getReadingTimeMinutes(body: string) {
-  const words = body
+function countWords(body: string) {
+  return body
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/`[^`]+`/g, ' ')
     .split(/\s+/)
     .filter(Boolean).length;
+}
 
-  return Math.max(1, Math.round(words / 220));
+function getReadingTimeMinutes(body: string) {
+  return Math.max(1, Math.round(countWords(body) / 220));
 }
 
 export default function Post() {
@@ -66,24 +68,43 @@ export default function Post() {
         path={`post/${post.slug}`}
         type="article"
         publishedTime={post.date}
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          headline: post.title,
-          description: post.excerpt,
-          datePublished: post.date,
-          dateModified: post.date,
-          author: {
-            '@type': 'Person',
-            name: SITE_NAME,
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.date,
+            dateModified: post.date,
+            wordCount: countWords(post.body),
+            timeRequired: `PT${readingTime}M`,
+            inLanguage: 'en-US',
+            author: {
+              '@type': 'Person',
+              name: SITE_NAME,
+            },
+            publisher: {
+              '@type': 'Person',
+              name: SITE_NAME,
+            },
+            mainEntityOfPage: `${SITE_URL}/post/${post.slug}`,
+            url: `${SITE_URL}/post/${post.slug}`,
           },
-          publisher: {
-            '@type': 'Person',
-            name: SITE_NAME,
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'Posts', item: `${SITE_URL}/posts` },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: post.title,
+                item: `${SITE_URL}/post/${post.slug}`,
+              },
+            ],
           },
-          mainEntityOfPage: `${SITE_URL}/post/${post.slug}`,
-          url: `${SITE_URL}/post/${post.slug}`,
-        }}
+        ]}
       />
       <Link to="/posts" className="article__crumb">
         <ArrowLeft size={16} aria-hidden />

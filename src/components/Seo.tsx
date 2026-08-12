@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION } from '../lib/site';
+import { collectHead } from '../lib/head';
 
 interface SeoProps {
   title: string;
@@ -8,6 +9,8 @@ interface SeoProps {
   path?: string;
   type?: 'website' | 'article' | 'profile';
   publishedTime?: string;
+  /** Keep the page out of search results (error pages, thin utility pages). */
+  noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
@@ -59,13 +62,18 @@ export default function Seo({
   path = '',
   type = 'website',
   publishedTime,
+  noindex = false,
   jsonLd,
 }: SeoProps) {
   const url = path ? `${SITE_URL}/${path}` : SITE_URL;
+  const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+
+  if (import.meta.env.SSR) {
+    // Prerender pass: hand the metadata to the build instead of the DOM.
+    collectHead({ title, description, url, type, publishedTime, noindex, jsonLd: jsonLdItems });
+  }
 
   useEffect(() => {
-    const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
-
     document.title = title;
     setMeta('description', description);
     setMeta('og:title', title, true);
@@ -73,7 +81,8 @@ export default function Seo({
     setMeta('og:url', url, true);
     setMeta('og:type', type === 'article' ? 'article' : 'website', true);
     setMeta('og:site_name', SITE_NAME, true);
-    setMeta('robots', 'index,follow,max-image-preview:large');
+    setMeta('og:locale', 'en_US', true);
+    setMeta('robots', noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large');
     setMeta('author', SITE_NAME);
     setMeta('twitter:card', 'summary');
     setMeta('twitter:title', title);
@@ -87,7 +96,9 @@ export default function Seo({
     }
 
     syncJsonLd(jsonLdItems);
-  }, [title, description, url, type, publishedTime, jsonLd]);
+    // jsonLdItems is rebuilt every render; the JSON string is the real input.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title, description, url, type, publishedTime, noindex, JSON.stringify(jsonLdItems)]);
 
   return null;
 }

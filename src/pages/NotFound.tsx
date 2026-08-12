@@ -10,6 +10,7 @@ export default function NotFound() {
         title={`Page not found - ${SITE_NAME}`}
         description="The page you requested could not be found."
         path=""
+        noindex
       />
       <div className="page__not-found-icon">
         <FileSearch size={42} aria-hidden />

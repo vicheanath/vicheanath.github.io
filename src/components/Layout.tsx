@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, Outlet, NavLink } from 'react-router-dom';
 import { Home, Newspaper, FolderGit2, Github, Mail, CircleUserRound } from 'lucide-react';
 import profileData from '../content/profile.json';
@@ -5,13 +6,23 @@ import { SOURCE_REPO_URL } from '../lib/site';
 
 const profile = profileData as { name: string };
 
-export default function Layout() {
-  const today = new Date().toLocaleDateString('en-US', {
+function formatToday() {
+  return new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+}
+
+export default function Layout() {
+  // Filled in after mount: the prerendered HTML would otherwise freeze the
+  // build date into the page and break hydration on every later visit.
+  const [today, setToday] = useState('');
+
+  useEffect(() => {
+    setToday(formatToday());
+  }, []);
 
   return (
     <div className="layout">
@@ -22,7 +33,7 @@ export default function Layout() {
         <h1 className="masthead__title">{profile.name}</h1>
         <p className="masthead__tagline">Personal bulletins &amp; occasional notes</p>
         <p className="masthead__path" aria-hidden>~/blog</p>
-        <p className="masthead__date">{today}</p>
+        <p className="masthead__date">{today || ' '}</p>
         <nav className="nav" aria-label="Main">
           <NavLink to="/" className="nav__link" end>
             <Home size={18} aria-hidden />
