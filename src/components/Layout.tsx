@@ -1,10 +1,8 @@
 import { useSyncExternalStore } from 'react';
 import { Link, Outlet, NavLink } from 'react-router-dom';
 import { Home, Newspaper, FolderGit2, Github, Mail, CircleUserRound } from 'lucide-react';
-import profileData from '../content/profile.json';
+import { profile } from '../content/profile';
 import { SOURCE_REPO_URL } from '../lib/site';
-
-const profile = profileData as { name: string };
 
 /** Never re-subscribes: the masthead date only needs to resolve once, on mount. */
 function subscribe() {

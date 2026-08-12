@@ -1,111 +1,192 @@
 import { Link } from 'react-router-dom';
-import { Github, Linkedin } from 'lucide-react';
+import {
+  Briefcase,
+  Building2,
+  GraduationCap,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Printer,
+  Wrench,
+} from 'lucide-react';
 import Seo from '../components/Seo';
-import profileData from '../content/profile.json';
-import { GITHUB_URL, SITE_NAME, SOURCE_REPO_URL, canonicalUrl } from '../lib/site';
+import LiveDuration, { LiveYearsOfExperience } from '../components/LiveDuration';
+import {
+  formatDuration,
+  formatPeriod,
+  getCurrentRole,
+  isOngoing,
+  profile,
+} from '../content/profile';
+import { GITHUB_URL, SOURCE_REPO_URL, canonicalUrl } from '../lib/site';
 
-const profile = profileData as {
-  name: string;
-  headline: string;
-  location: string;
-  linkedInUrl: string;
-  about?: string;
-  topSkills?: string[];
-};
+const { experience, education, topSkills: skills } = profile;
+const currentRole = getCurrentRole();
 
 export default function About() {
   return (
-    <section className="page">
+    <section className="page resume">
       <Seo
-        title={`About - ${SITE_NAME}`}
-        description="About the site owner, what this blog publishes, and how the site is maintained."
+        title={`About ${profile.name} — Software Engineer`}
+        description={`Profile and résumé for ${profile.name}: ${profile.headline}, based in ${profile.location}. Experience, education, and focus areas.`}
         path="about"
+        type="profile"
         jsonLd={[
           {
             '@context': 'https://schema.org',
-            '@type': 'AboutPage',
-            name: `About - ${SITE_NAME}`,
+            '@type': 'ProfilePage',
+            name: `About ${profile.name}`,
             url: canonicalUrl('about'),
-            description: 'Publisher and site information for the blog.',
+            description: `Profile and résumé for ${profile.name}.`,
           },
           {
             '@context': 'https://schema.org',
             '@type': 'Person',
             name: profile.name,
-            jobTitle: profile.headline,
-            homeLocation: {
-              '@type': 'Place',
-              name: profile.location,
+            jobTitle: currentRole?.title ?? profile.headline,
+            description: profile.about,
+            knowsAbout: skills,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: profile.location,
             },
+            worksFor: currentRole
+              ? { '@type': 'Organization', name: currentRole.company }
+              : undefined,
+            alumniOf: education.map((item) => ({
+              '@type': 'EducationalOrganization',
+              name: item.school,
+            })),
             sameAs: [profile.linkedInUrl, GITHUB_URL],
-            url: canonicalUrl(),
+            url: canonicalUrl('about'),
           },
         ]}
       />
 
-      <header className="page__header">
-        <p className="page__eyebrow">About</p>
-        <h1 className="page__title">Publisher and site information</h1>
-        <p className="page__intro">
-          This is an independently maintained software engineering site published by {profile.name}.
-          It focuses on original notes, project updates, and practical writing about .NET, frontend
-          development, and software delivery.
+      <header className="resume__header">
+        <p className="page__eyebrow">Profile</p>
+        <h1 className="page__title">{profile.name}</h1>
+        <p className="resume__headline">{profile.headline}</p>
+        <p className="resume__facts">
+          <span>
+            <MapPin size={15} aria-hidden />
+            {profile.location}
+          </span>
+          {profile.pronouns && <span>{profile.pronouns}</span>}
+          <span>
+            <Briefcase size={15} aria-hidden />
+            <LiveYearsOfExperience /> across {experience.length} roles
+          </span>
         </p>
+        <div className="resume__links">
+          <a href={profile.linkedInUrl} target="_blank" rel="noopener noreferrer" className="tag">
+            <Linkedin size={15} aria-hidden />
+            LinkedIn
+          </a>
+          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="tag">
+            <Github size={15} aria-hidden />
+            GitHub
+          </a>
+          <Link to="/contact" className="tag">
+            <Mail size={15} aria-hidden />
+            Contact
+          </Link>
+          <span className="resume__print">
+            <Printer size={14} aria-hidden />
+            Print this page for a PDF copy
+          </span>
+        </div>
       </header>
 
-      <section className="page__section">
-        <h2>Who runs the site</h2>
-        <p>
-          {profile.name} is a {profile.headline} based in {profile.location}. The site is used to publish
-          original technical writing, document project work, and keep a clear public record of ownership,
-          policies, and contact channels.
-        </p>
-        {profile.about && <p>{profile.about}</p>}
-        {profile.topSkills && profile.topSkills.length > 0 && (
-          <p>
-            <strong>Focus areas:</strong> {profile.topSkills.join(' · ')}
-          </p>
-        )}
-      </section>
+      {profile.about && (
+        <section className="page__section">
+          <h2>Summary</h2>
+          <p>{profile.about}</p>
+        </section>
+      )}
+
+      {skills.length > 0 && (
+        <section className="page__section">
+          <h2>
+            <Wrench size={17} aria-hidden />
+            <span>Core skills</span>
+          </h2>
+          <div className="tag-row">
+            {skills.map((skill) => (
+              <span key={skill} className="tag tag--static">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {experience.length > 0 && (
+        <section className="page__section">
+          <h2>
+            <Briefcase size={17} aria-hidden />
+            <span>Experience</span>
+          </h2>
+          <ol className="resume__timeline">
+            {experience.map((job) => (
+              <li key={`${job.company}-${job.start}`} className="resume__entry">
+                <p className="resume__role">{job.title}</p>
+                <p className="resume__org">
+                  <Building2 size={14} aria-hidden />
+                  {job.company}
+                </p>
+                <p className="resume__period">
+                  {formatPeriod(job)}
+                  {isOngoing(job) ? (
+                    <LiveDuration entry={job} prefix=" · " />
+                  ) : (
+                    ` · ${formatDuration(job)}`
+                  )}
+                </p>
+                <p className="resume__meta">
+                  {job.location} · {job.employmentType} · {job.workMode}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {education.length > 0 && (
+        <section className="page__section">
+          <h2>
+            <GraduationCap size={17} aria-hidden />
+            <span>Education</span>
+          </h2>
+          <ol className="resume__timeline">
+            {education.map((item) => (
+              <li key={`${item.school}-${item.start}`} className="resume__entry">
+                <p className="resume__role">{item.school}</p>
+                <p className="resume__org">{item.degree}</p>
+                <p className="resume__period">{formatPeriod(item)}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       <section className="page__section">
-        <h2>What readers should expect</h2>
+        <h2>About this site</h2>
         <p>
-          Articles are intended to be original, readable, and specific enough to help working engineers.
-          The site is not a guest-post marketplace, a republishing network, or a collection of thin pages.
+          This site is an independently maintained personal blog. It publishes original notes on .NET,
+          frontend development, and software delivery — no advertising, no sponsored posts, and no
+          republished content.
         </p>
         <p>
-          When content needs correction or clarification, it should be updated. Site-wide disclosures are
-          kept in the <Link to="/privacy">Privacy Policy</Link> and the{' '}
-          <Link to="/publishing-policy">Publishing Policy</Link>.
+          How articles are written and corrected is described in the{' '}
+          <Link to="/publishing-policy">Publishing Policy</Link>, and data handling is covered in the{' '}
+          <Link to="/privacy">Privacy Policy</Link>. The site itself is open source:{' '}
+          <a href={SOURCE_REPO_URL} target="_blank" rel="noopener noreferrer">
+            view the repository
+          </a>
+          .
         </p>
-      </section>
-
-      <section className="page__section">
-        <h2>Ownership and transparency</h2>
-        <div className="page__link-grid">
-          <a href={profile.linkedInUrl} target="_blank" rel="noopener noreferrer" className="page__card-link">
-            <Linkedin size={18} aria-hidden />
-            <span>
-              <strong>LinkedIn</strong>
-              <span>Professional profile for the site owner and publisher.</span>
-            </span>
-          </a>
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="page__card-link">
-            <Github size={18} aria-hidden />
-            <span>
-              <strong>GitHub</strong>
-              <span>Public code, project history, and engineering work.</span>
-            </span>
-          </a>
-          <a href={SOURCE_REPO_URL} target="_blank" rel="noopener noreferrer" className="page__card-link">
-            <Github size={18} aria-hidden />
-            <span>
-              <strong>Site source</strong>
-              <span>Repository for the blog itself, including routes and policy pages.</span>
-            </span>
-          </a>
-        </div>
       </section>
     </section>
   );

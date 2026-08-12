@@ -1,15 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Github, Linkedin, MessageSquareText } from 'lucide-react';
 import Seo from '../components/Seo';
-import profileData from '../content/profile.json';
+import { profile } from '../content/profile';
 import { DEFAULT_DESCRIPTION, GITHUB_URL, SITE_NAME, SOURCE_REPO_URL, canonicalUrl } from '../lib/site';
-
-const profile = profileData as {
-  name: string;
-  headline: string;
-  location: string;
-  linkedInUrl: string;
-};
 
 export default function Contact() {
   return (
