@@ -15,8 +15,9 @@ export const SITE_URL = (process.env.SITE_URL || 'https://vicheanath.github.io')
 /** Paths are relative to the site root, without a leading slash. */
 export const staticRoutes = [
   { path: '', priority: '1.0', changefreq: 'daily' },
+  { path: 'blog', priority: '0.9', changefreq: 'weekly' },
+  { path: 'posts', priority: '0.8', changefreq: 'weekly' },
   { path: 'about', priority: '0.8', changefreq: 'monthly' },
-  { path: 'posts', priority: '0.9', changefreq: 'weekly' },
   { path: 'projects', priority: '0.8', changefreq: 'weekly' },
   { path: 'contact', priority: '0.7', changefreq: 'monthly' },
   { path: 'privacy', priority: '0.4', changefreq: 'yearly' },
@@ -46,9 +47,20 @@ export function canonicalUrl(routePath = '') {
 }
 
 export function postRoutes(posts = loadPosts()) {
-  return posts
-    .filter((post) => typeof post?.slug === 'string' && post.slug.trim().length > 0)
-    .map((post) => ({ path: `post/${post.slug}`, priority: '0.7', changefreq: 'monthly', post }));
+  const valid = posts.filter((post) => typeof post?.slug === 'string' && post.slug.trim().length > 0);
+  const blogRoutes = valid.map((post) => ({
+    path: `blog/${post.slug}`,
+    priority: '0.7',
+    changefreq: 'monthly',
+    post,
+  }));
+  const legacyRoutes = valid.map((post) => ({
+    path: `post/${post.slug}`,
+    priority: '0.6',
+    changefreq: 'monthly',
+    post,
+  }));
+  return [...blogRoutes, ...legacyRoutes];
 }
 
 /** Distinct tags across all posts, each becoming its own static page. */

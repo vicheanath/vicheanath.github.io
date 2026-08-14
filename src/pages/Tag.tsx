@@ -24,9 +24,9 @@ export default function TagPage() {
         <h1 className="page__title">Tag not found</h1>
         <p className="page__intro">No posts are filed under this tag.</p>
         <div className="page__actions">
-          <Link to="/posts" className="article__back-link">
+          <Link to="/blog" className="article__back-link">
             <ArrowLeft size={18} aria-hidden />
-            <span>Browse all posts</span>
+            <span>Browse all bulletins</span>
           </Link>
         </div>
       </section>
@@ -53,14 +53,14 @@ export default function TagPage() {
             '@type': 'BlogPosting',
             headline: post.title,
             datePublished: post.date,
-            url: canonicalUrl(`post/${post.slug}`),
+            url: canonicalUrl(`blog/${post.slug}`),
           })),
         }}
       />
 
-      <Link to="/posts" className="article__crumb">
+      <Link to="/blog" className="article__crumb">
         <ArrowLeft size={16} aria-hidden />
-        <span>All posts</span>
+        <span>All bulletins</span>
       </Link>
 
       <h1 className="home__heading home__heading--tag">

@@ -1,77 +1,71 @@
-import { useSyncExternalStore } from 'react';
-import { Link, Outlet, NavLink } from 'react-router-dom';
-import { Home, Newspaper, FolderGit2, Github, Mail, CircleUserRound } from 'lucide-react';
-import { profile } from '../content/profile';
-import { SOURCE_REPO_URL } from '../lib/site';
-
-/** Never re-subscribes: the masthead date only needs to resolve once, on mount. */
-function subscribe() {
-  return () => {};
-}
-
-function formatToday() {
-  return new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
+import { useState, useEffect, useRef } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import gsap from 'gsap';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import CommandPalette from './CommandPalette';
 
 export default function Layout() {
-  // Resolved in the browser: the prerendered HTML would otherwise freeze the
-  // build date into the page. The null server snapshot keeps hydration clean.
-  const today = useSyncExternalStore(subscribe, formatToday, () => null);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const location = useLocation();
+  const mainContentRef = useRef<HTMLElement>(null);
+
+  // Global Cmd+K / Ctrl+K keyboard shortcut
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // GSAP Smooth Route Transition
+  useEffect(() => {
+    if (typeof window === 'undefined' || !mainContentRef.current) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        mainContentRef.current,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }
+      );
+    }, mainContentRef);
+
+    return () => ctx.revert();
+  }, [location.pathname]);
 
   return (
-    <div className="layout">
+    <div className="app-shell">
       <a href="#main" className="skip-link">
         Skip to main content
       </a>
-      <header className="masthead">
-        <h1 className="masthead__title">{profile.name}</h1>
-        <p className="masthead__tagline">Personal bulletins &amp; occasional notes</p>
-        <p className="masthead__path" aria-hidden>~/blog</p>
-        <p className="masthead__date">{today}</p>
-        <nav className="nav" aria-label="Main">
-          <NavLink to="/" className="nav__link" end>
-            <Home size={18} aria-hidden />
-            <span>Home</span>
-          </NavLink>
-          <NavLink to="/about" className="nav__link">
-            <CircleUserRound size={18} aria-hidden />
-            <span>About</span>
-          </NavLink>
-          <NavLink to="/posts" className="nav__link">
-            <Newspaper size={18} aria-hidden />
-            <span>Posts</span>
-          </NavLink>
-          <NavLink to="/projects" className="nav__link">
-            <FolderGit2 size={18} aria-hidden />
-            <span>Projects</span>
-          </NavLink>
-          <NavLink to="/contact" className="nav__link">
-            <Mail size={18} aria-hidden />
-            <span>Contact</span>
-          </NavLink>
-        </nav>
-      </header>
-      <main className="main" id="main">
-        <Outlet />
-      </main>
-      <footer className="footer">
-        <p className="footer__line">{profile.name} · original software notes and project updates</p>
-        <div className="footer__links">
-          <Link to="/about">About</Link>
-          <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/publishing-policy">Publishing Policy</Link>
-          <Link to="/contact">Contact</Link>
-          <a href={SOURCE_REPO_URL} target="_blank" rel="noopener noreferrer">
-            <Github size={14} aria-hidden />
-            <span>Source</span>
-          </a>
+
+      {/* Modern Glassmorphism Sticky Navbar */}
+      <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
+
+      {/* Global Command Palette (⌘K) */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+      />
+
+      {/* Main Dynamic View Area */}
+      <main className="main-content-wrapper" id="main" ref={mainContentRef}>
+        <div className="layout-container">
+          <Outlet />
         </div>
-      </footer>
+      </main>
+
+      {/* Full-Stack Engineer Footer */}
+      <Footer />
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function PostList({ posts, emptyMessage, activeTag }: PostListPro
     <ul className="post-list">
       {posts.map((post) => (
         <li key={post.slug} className="post-list__item">
-          <Link to={`/post/${post.slug}`} className="post-list__link">
+          <Link to={`/blog/${post.slug}`} className="post-list__link">
             <span className="post-list__content">
               <span className="post-list__title">{post.title}</span>
               <span className="post-list__meta">

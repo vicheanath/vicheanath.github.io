@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Briefcase,
@@ -8,8 +9,17 @@ import {
   Mail,
   MapPin,
   Printer,
-  Wrench,
+  Sparkles,
+  Cpu,
+  Layers,
+  ShieldCheck,
+  Zap,
+  ArrowUpRight,
+  Code2,
+  Database,
+  Cloud,
 } from 'lucide-react';
+import gsap from 'gsap';
 import Seo from '../components/Seo';
 import LiveDuration, { LiveYearsOfExperience } from '../components/LiveDuration';
 import {
@@ -21,15 +31,46 @@ import {
 } from '../content/profile';
 import { GITHUB_URL, SOURCE_REPO_URL, canonicalUrl } from '../lib/site';
 
-const { experience, education, topSkills: skills } = profile;
+const { experience, education } = profile;
 const currentRole = getCurrentRole();
 
 export default function About() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !containerRef.current) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.about-hero, .about-section, .about-skill-group, .resume__entry, .about-principle-card',
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: 'power2.out',
+          clearProps: 'opacity,transform',
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handlePrint = () => {
+    if (typeof window !== 'undefined') {
+      window.print();
+    }
+  };
+
   return (
-    <section className="page resume">
+    <section className="page about-page" ref={containerRef}>
       <Seo
-        title={`About ${profile.name} — Software Engineer`}
-        description={`Profile and résumé for ${profile.name}: ${profile.headline}, based in ${profile.location}. Experience, education, and focus areas.`}
+        title={`About ${profile.name} — Senior Full-Stack Engineer`}
+        description={`Profile and résumé for ${profile.name}: ${profile.headline}, based in ${profile.location}. Experience, education, and technical competencies.`}
         path="about"
         type="profile"
         jsonLd={[
@@ -46,7 +87,7 @@ export default function About() {
             name: profile.name,
             jobTitle: currentRole?.title ?? profile.headline,
             description: profile.about,
-            knowsAbout: skills,
+            knowsAbout: profile.topSkills,
             address: {
               '@type': 'PostalAddress',
               addressLocality: profile.location,
@@ -64,126 +105,266 @@ export default function About() {
         ]}
       />
 
-      <header className="resume__header">
-        <p className="page__eyebrow">Profile</p>
-        <h1 className="page__title">{profile.name}</h1>
-        <p className="resume__headline">{profile.headline}</p>
-        <p className="resume__facts">
-          <span>
+      {/* Hero Header */}
+      <header className="about-hero">
+        <div className="section-badge">
+          <Sparkles size={13} aria-hidden />
+          <span>About Me &amp; Résumé</span>
+        </div>
+        <h1 className="about-hero__title">{profile.name}</h1>
+        <p className="about-hero__headline">{profile.headline}</p>
+
+        <div className="about-hero__meta">
+          <span className="about-hero__meta-item">
             <MapPin size={15} aria-hidden />
-            {profile.location}
+            <span>{profile.location}</span>
           </span>
-          {profile.pronouns && <span>{profile.pronouns}</span>}
-          <span>
+          <span className="about-hero__meta-item">
             <Briefcase size={15} aria-hidden />
-            <LiveYearsOfExperience /> across {experience.length} roles
+            <span>
+              <LiveYearsOfExperience /> of Experience across {experience.length} roles
+            </span>
           </span>
-        </p>
-        <div className="resume__links">
-          <a href={profile.linkedInUrl} target="_blank" rel="noopener noreferrer" className="tag">
+          <span className="about-hero__status-chip">
+            <span className="about-hero__status-dot" />
+            <span>Shipping @ CED</span>
+          </span>
+        </div>
+
+        <div className="about-hero__actions">
+          <a
+            href={profile.linkedInUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--sm btn--primary"
+          >
             <Linkedin size={15} aria-hidden />
-            LinkedIn
+            <span>LinkedIn Profile</span>
+            <ArrowUpRight size={13} />
           </a>
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="tag">
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--sm btn--outline"
+          >
             <Github size={15} aria-hidden />
-            GitHub
+            <span>GitHub</span>
+            <ArrowUpRight size={13} />
           </a>
-          <Link to="/contact" className="tag">
+          <Link to="/contact" className="btn btn--sm btn--outline">
             <Mail size={15} aria-hidden />
-            Contact
+            <span>Contact</span>
           </Link>
-          <span className="resume__print">
+          <button
+            type="button"
+            className="btn btn--sm btn--secondary about-hero__print-btn"
+            onClick={handlePrint}
+            aria-label="Print or Save PDF"
+          >
             <Printer size={14} aria-hidden />
-            Print this page for a PDF copy
-          </span>
+            <span>Print / Save PDF</span>
+          </button>
         </div>
       </header>
 
+      {/* Summary Narrative */}
       {profile.about && (
-        <section className="page__section">
-          <h2>Summary</h2>
-          <p>{profile.about}</p>
+        <section className="about-section about-card">
+          <h2 className="about-section__title">Executive Summary</h2>
+          <p className="about-summary__text">{profile.about}</p>
         </section>
       )}
 
-      {skills.length > 0 && (
-        <section className="page__section">
-          <h2>
-            <Wrench size={17} aria-hidden />
-            <span>Core skills</span>
+      {/* Competencies Matrix */}
+      <section className="about-section">
+        <h2 className="about-section__title">
+          <Layers size={18} aria-hidden />
+          <span>Core Competencies &amp; Technical Stack</span>
+        </h2>
+        <div className="about-skills-grid">
+          <div className="about-skill-group">
+            <div className="about-skill-group__header">
+              <Cpu size={16} className="text-accent" />
+              <h3>Backend &amp; Architecture</h3>
+            </div>
+            <ul className="about-skill-group__list">
+              <li>C# / .NET 9 &amp; .NET 8</li>
+              <li>ASP.NET Core Minimal APIs</li>
+              <li>Clean Architecture &amp; CQRS</li>
+              <li>MediatR &amp; Domain-Driven Design (DDD)</li>
+              <li>Microservices &amp; Event-Driven Architecture</li>
+              <li>REST &amp; gRPC Services</li>
+            </ul>
+          </div>
+
+          <div className="about-skill-group">
+            <div className="about-skill-group__header">
+              <Code2 size={16} className="text-accent" />
+              <h3>Frontend &amp; UI Engineering</h3>
+            </div>
+            <ul className="about-skill-group__list">
+              <li>React 19 &amp; Next.js</li>
+              <li>TypeScript (Strict Typing &amp; Generics)</li>
+              <li>Angular &amp; RxJS</li>
+              <li>Modern Responsive CSS &amp; Tailwind</li>
+              <li>Core Web Vitals &amp; Performance</li>
+              <li>Optimistic UI &amp; State Management</li>
+            </ul>
+          </div>
+
+          <div className="about-skill-group">
+            <div className="about-skill-group__header">
+              <Database size={16} className="text-accent" />
+              <h3>Databases &amp; Persistence</h3>
+            </div>
+            <ul className="about-skill-group__list">
+              <li>Microsoft SQL Server (T-SQL, Indexing)</li>
+              <li>PostgreSQL</li>
+              <li>Entity Framework Core 9</li>
+              <li>Dapper (High-Throughput Read Models)</li>
+              <li>Redis Distributed Caching</li>
+              <li>Database Migrations &amp; Transactions</li>
+            </ul>
+          </div>
+
+          <div className="about-skill-group">
+            <div className="about-skill-group__header">
+              <Cloud size={16} className="text-accent" />
+              <h3>Cloud, DevOps &amp; Security</h3>
+            </div>
+            <ul className="about-skill-group__list">
+              <li>Microsoft Azure (App Services, Functions, SQL)</li>
+              <li>Docker &amp; Multi-Stage Builds</li>
+              <li>CI/CD (GitHub Actions, Automated Pipelines)</li>
+              <li>OAuth2, OpenID Connect &amp; JWT Security</li>
+              <li>OpenTelemetry, Serilog &amp; Distributed Tracing</li>
+              <li>Unit &amp; Integration Testing (xUnit, Moq)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Professional Experience */}
+      {experience.length > 0 && (
+        <section className="about-section">
+          <h2 className="about-section__title">
+            <Briefcase size={18} aria-hidden />
+            <span>Professional Experience</span>
           </h2>
-          <div className="tag-row">
-            {skills.map((skill) => (
-              <span key={skill} className="tag tag--static">
-                {skill}
-              </span>
+          <div className="about-timeline">
+            {experience.map((job) => (
+              <div
+                key={`${job.company}-${job.start}`}
+                className={`about-timeline-card ${isOngoing(job) ? 'about-timeline-card--current' : ''}`}
+              >
+                <div className="about-timeline-card__header">
+                  <div>
+                    <h3 className="about-timeline-card__role">{job.title}</h3>
+                    <div className="about-timeline-card__org">
+                      <Building2 size={14} aria-hidden />
+                      <span>{job.company}</span>
+                    </div>
+                  </div>
+                  <div className="about-timeline-card__badges">
+                    <span className="about-timeline-badge about-timeline-badge--period">
+                      {formatPeriod(job)}
+                    </span>
+                    <span className="about-timeline-badge about-timeline-badge--duration">
+                      {isOngoing(job) ? (
+                        <LiveDuration entry={job} />
+                      ) : (
+                        formatDuration(job)
+                      )}
+                    </span>
+                  </div>
+                </div>
+                <div className="about-timeline-card__meta">
+                  <span>{job.location}</span>
+                  <span>&middot;</span>
+                  <span>{job.employmentType}</span>
+                  <span>&middot;</span>
+                  <span className="about-timeline-tag">{job.workMode}</span>
+                </div>
+              </div>
             ))}
           </div>
         </section>
       )}
 
-      {experience.length > 0 && (
-        <section className="page__section">
-          <h2>
-            <Briefcase size={17} aria-hidden />
-            <span>Experience</span>
-          </h2>
-          <ol className="resume__timeline">
-            {experience.map((job) => (
-              <li key={`${job.company}-${job.start}`} className="resume__entry">
-                <p className="resume__role">{job.title}</p>
-                <p className="resume__org">
-                  <Building2 size={14} aria-hidden />
-                  {job.company}
-                </p>
-                <p className="resume__period">
-                  {formatPeriod(job)}
-                  {isOngoing(job) ? (
-                    <LiveDuration entry={job} prefix=" · " />
-                  ) : (
-                    ` · ${formatDuration(job)}`
-                  )}
-                </p>
-                <p className="resume__meta">
-                  {job.location} · {job.employmentType} · {job.workMode}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-
+      {/* Education */}
       {education.length > 0 && (
-        <section className="page__section">
-          <h2>
-            <GraduationCap size={17} aria-hidden />
-            <span>Education</span>
+        <section className="about-section">
+          <h2 className="about-section__title">
+            <GraduationCap size={18} aria-hidden />
+            <span>Education &amp; Credentials</span>
           </h2>
-          <ol className="resume__timeline">
+          <div className="about-education-grid">
             {education.map((item) => (
-              <li key={`${item.school}-${item.start}`} className="resume__entry">
-                <p className="resume__role">{item.school}</p>
-                <p className="resume__org">{item.degree}</p>
-                <p className="resume__period">{formatPeriod(item)}</p>
-              </li>
+              <div key={`${item.school}-${item.start}`} className="about-edu-card">
+                <div className="about-edu-card__icon">
+                  <GraduationCap size={20} />
+                </div>
+                <div className="about-edu-card__content">
+                  <h3 className="about-edu-card__school">{item.school}</h3>
+                  <p className="about-edu-card__degree">{item.degree}</p>
+                  <span className="about-edu-card__period">{formatPeriod(item)}</span>
+                </div>
+              </div>
             ))}
-          </ol>
+          </div>
         </section>
       )}
 
-      <section className="page__section">
-        <h2>About this site</h2>
+      {/* Engineering Philosophy */}
+      <section className="about-section">
+        <h2 className="about-section__title">
+          <Zap size={18} aria-hidden />
+          <span>Engineering Philosophy</span>
+        </h2>
+        <div className="about-principles-grid">
+          <div className="about-principle-card">
+            <div className="about-principle-card__icon">
+              <ShieldCheck size={20} />
+            </div>
+            <h3>Architecture with Invariants</h3>
+            <p>
+              I structure applications with clear boundaries. Domain rules remain decoupled from framework quirks, ensuring high testability, agility, and maintainability.
+            </p>
+          </div>
+          <div className="about-principle-card">
+            <div className="about-principle-card__icon">
+              <Zap size={20} />
+            </div>
+            <h3>Speed &amp; Low Latency</h3>
+            <p>
+              From non-blocking asynchronous APIs and split queries to cache-aside distribution, I design systems with sub-30ms P99 responses as a standard.
+            </p>
+          </div>
+          <div className="about-principle-card">
+            <div className="about-principle-card__icon">
+              <Code2 size={20} />
+            </div>
+            <h3>Fluid Frontend Craft</h3>
+            <p>
+              Great backend architecture deserves an equally polished frontend. I craft responsive, intuitive, and accessible user interfaces that feel alive.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Site Transparency / Open Source */}
+      <section className="about-section about-transparency-card">
+        <h2 className="about-section__title">About This Website</h2>
         <p>
-          This site is an independently maintained personal blog. It publishes original notes on .NET,
-          frontend development, and software delivery — no advertising, no sponsored posts, and no
-          republished content.
+          This website is built with <strong>React 19</strong>, <strong>TypeScript</strong>, and <strong>Vite SSR / Static Generation</strong>.
+          It publishes original engineering articles with zero trackers, zero ads, and full accessibility compliance.
         </p>
         <p>
-          How articles are written and corrected is described in the{' '}
-          <Link to="/publishing-policy">Publishing Policy</Link>, and data handling is covered in the{' '}
-          <Link to="/privacy">Privacy Policy</Link>. The site itself is open source:{' '}
-          <a href={SOURCE_REPO_URL} target="_blank" rel="noopener noreferrer">
-            view the repository
+          To review site policies, read the <Link to="/publishing-policy">Publishing Policy</Link> and <Link to="/privacy">Privacy Policy</Link>.
+          The complete codebase is open-source on GitHub:{' '}
+          <a href={SOURCE_REPO_URL} target="_blank" rel="noopener noreferrer" className="text-accent">
+            view source repository <ArrowUpRight size={13} className="inline-icon" />
           </a>
           .
         </p>

@@ -22,10 +22,12 @@ export const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'about', element: <About /> },
+      { path: 'blog', element: <Posts /> },
+      { path: 'blog/:slug', element: <Post /> },
       { path: 'posts', element: <Posts /> },
       { path: 'post/:slug', element: <Post /> },
       { path: 'tag/:slug', element: <TagPage /> },
+      { path: 'about', element: <About /> },
       { path: 'projects', element: <Projects /> },
       { path: 'contact', element: <Contact /> },
       { path: 'privacy', element: <Privacy /> },

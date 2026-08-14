@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { FolderGit2, Github, Loader2, Star } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { FolderGit2, Github, Loader2, Star, ExternalLink, Code2 } from "lucide-react";
+import gsap from "gsap";
 import Seo from "../components/Seo";
 
 const GITHUB_USER = "vicheanath";
@@ -127,6 +128,7 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -148,19 +150,41 @@ export default function Projects() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!loading && projects.length > 0 && listRef.current) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReducedMotion) {
+        gsap.from('.project-list__item', {
+          y: 20,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: 'power2.out',
+        });
+      }
+    }
+  }, [loading, projects]);
+
   return (
-    <section className="projects">
+    <section className="projects-page">
       <Seo title="Projects — Vichea Nath" description="Pinned and featured GitHub projects." path="projects" />
-      <h2 className="projects__heading">
-        <FolderGit2 size={22} aria-hidden />
-        <span>Projects</span>
-      </h2>
-      <p className="projects__intro">
-        Pinned and featured projects from GitHub.
-      </p>
+      
+      <div className="section-header">
+        <div className="section-badge">
+          <FolderGit2 size={14} aria-hidden />
+          <span>Open Source &amp; Systems</span>
+        </div>
+        <h1 className="section-title">
+          Repositories &amp; <span className="text-highlight">Projects</span>
+        </h1>
+        <p className="section-subtitle">
+          Featured repositories, architectures, and applications from GitHub.
+        </p>
+      </div>
+
       {loading ? (
         <div className="projects__empty" aria-busy="true">
-          <Loader2 size={24} className="projects__loader" aria-hidden />
+          <Loader2 size={24} className="projects__loader spin-icon" aria-hidden />
           <p>Loading projects from GitHub…</p>
         </div>
       ) : error ? (
@@ -170,10 +194,10 @@ export default function Projects() {
             href={`https://github.com/${GITHUB_USER}?tab=repositories`}
             target="_blank"
             rel="noopener noreferrer"
-            className="projects__link"
+            className="btn btn--secondary"
           >
             <Github size={18} aria-hidden />
-            View on GitHub
+            <span>View on GitHub</span>
           </a>
         </div>
       ) : projects.length === 0 ? (
@@ -183,14 +207,14 @@ export default function Projects() {
             href={`https://github.com/${GITHUB_USER}?tab=repositories`}
             target="_blank"
             rel="noopener noreferrer"
-            className="projects__link"
+            className="btn btn--secondary"
           >
             <Github size={18} aria-hidden />
-            View on GitHub
+            <span>View on GitHub</span>
           </a>
         </div>
       ) : (
-        <ul className="project-list">
+        <ul className="project-list" ref={listRef}>
           {projects.map((project) => (
             <li key={project.url} className="project-list__item">
               <a
@@ -199,7 +223,10 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 className="project-list__link"
               >
-                <span className="project-list__name">{project.name}</span>
+                <div className="project-list__header">
+                  <span className="project-list__name">{project.name}</span>
+                  <ExternalLink size={14} className="project-list__arrow" aria-hidden />
+                </div>
                 {project.description && (
                   <p className="project-list__description">
                     {project.description}
@@ -208,12 +235,13 @@ export default function Projects() {
                 <span className="project-list__meta">
                   {project.language && (
                     <span className="project-list__language">
+                      <Code2 size={12} aria-hidden />
                       {project.language}
                     </span>
                   )}
                   {project.stars > 0 && (
                     <span className="project-list__stars">
-                      <Star size={14} aria-hidden />
+                      <Star size={13} aria-hidden />
                       {project.stars}
                     </span>
                   )}
