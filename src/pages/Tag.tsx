@@ -37,7 +37,7 @@ export default function TagPage() {
   const otherTags = getAllTags().filter((item) => item.slug !== tag.slug);
 
   return (
-    <section className="home home--posts-only">
+    <section className="blog-page blog-page--tag">
       <Seo
         title={`${tag.name} — ${SITE_NAME}`}
         description={`Articles tagged ${tag.name}: ${posts.length} ${
@@ -63,15 +63,23 @@ export default function TagPage() {
         <span>All bulletins</span>
       </Link>
 
-      <h1 className="home__heading home__heading--tag">
-        <TagIcon size={20} aria-hidden />
-        <span>{tag.name}</span>
-        <span className="home__count">{posts.length}</span>
-      </h1>
-      <p className="home__intro">
+      <header className="section-header">
+        <div className="section-badge">
+          <TagIcon size={14} aria-hidden />
+          <span>Topic archive</span>
+        </div>
+        <h1 className="section-title">
+          {tag.name} <span className="text-highlight">bulletins</span>
+        </h1>
+      </header>
+      <p className="section-subtitle">
         Every bulletin filed under {tag.name}, newest first.
       </p>
 
+      <div className="blog-page__results-heading">
+        <h2>All bulletins</h2>
+        <span>{posts.length} {posts.length === 1 ? 'result' : 'results'}</span>
+      </div>
       <PostList posts={posts} activeTag={tag.slug} emptyMessage="Nothing filed here yet." />
 
       {otherTags.length > 0 && (

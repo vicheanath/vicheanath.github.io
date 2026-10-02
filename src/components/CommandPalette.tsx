@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Home, CircleUserRound, FolderGit2, Newspaper, Mail, Terminal, ArrowRight, X, ExternalLink } from 'lucide-react';
+import { Search, Home, CircleUserRound, FolderGit2, Newspaper, Mail, Terminal, ArrowRight, X } from 'lucide-react';
 import gsap from 'gsap';
 import { getAllPosts } from '../lib/posts';
-import { GITHUB_URL, LINKEDIN_URL } from '../lib/site';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -25,11 +24,6 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     { label: 'Projects — Featured & GitHub Repos', path: '/projects', icon: <FolderGit2 size={16} /> },
     { label: 'Blog — Architecture Bulletins & Notes', path: '/blog', icon: <Newspaper size={16} /> },
     { label: 'Contact — Inquiries & Collaboration', path: '/contact', icon: <Mail size={16} /> },
-  ];
-
-  const externalItems = [
-    { label: 'GitHub Profile (@vicheanath)', url: GITHUB_URL, icon: <ExternalLink size={16} /> },
-    { label: 'LinkedIn Profile (/in/vicheanath)', url: LINKEDIN_URL, icon: <ExternalLink size={16} /> },
   ];
 
   const filteredNav = navigationItems.filter((item) =>
@@ -175,21 +169,6 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             </div>
           )}
 
-          <div className="cmd-palette-group">
-            <div className="cmd-palette-group-title">External Links</div>
-            {externalItems.map((ext) => (
-              <a
-                key={ext.url}
-                href={ext.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cmd-palette-item"
-              >
-                <div className="cmd-palette-item-icon">{ext.icon}</div>
-                <span className="cmd-palette-item-label">{ext.label}</span>
-              </a>
-            ))}
-          </div>
         </div>
 
         <div className="cmd-palette-footer">

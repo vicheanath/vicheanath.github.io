@@ -42,7 +42,7 @@ export default function ExperienceTimeline() {
           Professional Experience &amp; <span className="text-highlight">Impact</span>
         </h2>
         <p className="section-subtitle">
-          6+ years delivering scalable enterprise software across Fintech, E-commerce, and high-load web platforms.
+          Notes on designing scalable software and maintaining high-load web platforms.
         </p>
       </div>
 

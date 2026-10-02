@@ -1,82 +1,43 @@
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, MessageSquareText } from 'lucide-react';
+import { Linkedin, ArrowUpRight } from 'lucide-react';
 import Seo from '../components/Seo';
-import { profile } from '../content/profile';
-import { DEFAULT_DESCRIPTION, GITHUB_URL, SITE_NAME, SOURCE_REPO_URL, canonicalUrl } from '../lib/site';
+import { DEFAULT_DESCRIPTION, LINKEDIN_URL, SITE_NAME } from '../lib/site';
 
 export default function Contact() {
   return (
     <section className="page">
       <Seo
         title={`Contact - ${SITE_NAME}`}
-        description="Ways to contact Vichea Nath about the blog, software work, and corrections."
+        description="Information about this technical notes site."
         path="contact"
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'ContactPage',
-          name: `Contact ${SITE_NAME}`,
-          url: canonicalUrl('contact'),
-          description: 'Contact information for the blog owner and publisher.',
-        }}
       />
-
       <header className="page__header">
         <p className="page__eyebrow">Contact</p>
-        <h1 className="page__title">Reach the site owner</h1>
+        <h1 className="page__title">Let&apos;s connect.</h1>
         <p className="page__intro">
-          This blog is written and maintained by {profile.name}. If you want to talk about an article,
-          report an issue, or discuss software work, these are the best places to reach out.
+          LinkedIn is the best place to learn more about my work and get in touch.
         </p>
       </header>
-
       <section className="page__section">
-        <h2>Primary contact options</h2>
-        <div className="page__link-grid">
-          <a href={profile.linkedInUrl} target="_blank" rel="noopener noreferrer" className="page__card-link">
-            <Linkedin size={18} aria-hidden />
-            <span>
-              <strong>LinkedIn</strong>
-              <span>Professional messages and collaboration inquiries.</span>
-            </span>
-          </a>
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="page__card-link">
-            <Github size={18} aria-hidden />
-            <span>
-              <strong>GitHub</strong>
-              <span>Code, repositories, and project history.</span>
-            </span>
-          </a>
-          <a href={SOURCE_REPO_URL} target="_blank" rel="noopener noreferrer" className="page__card-link">
-            <MessageSquareText size={18} aria-hidden />
-            <span>
-              <strong>Site source</strong>
-              <span>Open an issue if you spot a broken link, typo, or technical problem.</span>
-            </span>
-          </a>
-        </div>
-      </section>
-
-      <section className="page__section">
-        <h2>What this site is for</h2>
+        <h2>Find me online</h2>
+        <p>{DEFAULT_DESCRIPTION}</p>
+        <a
+          className="page__card-link"
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Linkedin size={18} aria-hidden />
+          <span>
+            <strong>Vichea Nath on LinkedIn</strong>
+            <span>View my professional profile and send a message.</span>
+          </span>
+          <ArrowUpRight size={16} aria-hidden />
+        </a>
         <p>
-          The site focuses on original notes about software architecture, .NET, React, and personal
-          projects. It is not a generic content farm or guest-post network. Every page is intended to be
-          readable, useful, and clearly attributable to a real publisher.
+          For technical corrections, use the source repository or review the{' '}
+          <Link to="/privacy">privacy policy</Link>.
         </p>
-        <p>
-          {profile.headline} based in {profile.location}. For privacy, this site does not publish a direct
-          email address in plain text, but the channels above are actively monitored.
-        </p>
-      </section>
-
-      <section className="page__section">
-        <h2>Policies</h2>
-        <p>
-          For cookies and data handling details, read the <Link to="/privacy">Privacy Policy</Link>.
-          For how content is written, corrected, and disclosed, read the{' '}
-          <Link to="/publishing-policy">Publishing Policy</Link>.
-        </p>
-        <p className="page__muted">{DEFAULT_DESCRIPTION}</p>
       </section>
     </section>
   );

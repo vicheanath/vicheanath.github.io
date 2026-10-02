@@ -40,65 +40,14 @@ export interface Profile {
 
 export const profile: Profile = {
   name: 'Vichea Nath',
-  pronouns: 'He/Him',
-  headline: 'Software Engineer C# .NET Core & React @ CED',
-  location: 'Irving, Texas, United States',
+  headline: 'Full-stack software engineer',
+  location: '',
   linkedInUrl: 'https://www.linkedin.com/in/vicheanath/',
   about:
-    "I'm a results-driven Full-Stack Developer with 6+ years of hands-on experience building scalable and secure applications across industries including Fintech, E-commerce, and Sports Betting. My passion lies in turning complex problems into elegant technical solutions using modern tools and frameworks. I specialize in responsive web apps and robust backend APIs with React, Angular, TypeScript, C#, .NET Core, Python, REST, OAuth2, SQL Server, PostgreSQL, microservices, Azure, AWS, Docker, and CI/CD. I'm committed to clean code, scalable design, and continuous improvement.",
-  topSkills: ['.NET Core', 'C#', 'Microsoft Azure', 'Angular', 'Microsoft SQL Server'],
-  experience: [
-    {
-      title: 'Software Engineer',
-      company: 'CED',
-      start: '2025-07',
-      end: 'present',
-      location: 'Irving, Texas, United States',
-      employmentType: 'Full-time',
-      workMode: 'Hybrid',
-    },
-    {
-      title: 'Full Stack .NET Developer',
-      company: 'Simpaz Corporation',
-      start: '2024-04',
-      end: '2025-07',
-      location: 'Lake Oswego, Oregon, United States',
-      employmentType: 'Contract',
-      workMode: 'Remote',
-    },
-    {
-      title: 'Software Engineer',
-      company: 'PHVCT A2888',
-      start: '2021-06',
-      end: '2024-03',
-      location: 'Phnom Penh, Cambodia',
-      employmentType: 'Full-time',
-      workMode: 'Hybrid',
-    },
-    {
-      title: 'Full Stack Developer',
-      company: 'BeOne',
-      start: '2019-01',
-      end: '2021-06',
-      location: 'Phnom Penh, Cambodia',
-      employmentType: 'Full-time',
-      workMode: 'On-site',
-    },
-  ],
-  education: [
-    {
-      school: 'Maharishi International University',
-      degree: "Master's degree, Computer Science",
-      start: '2023-08',
-      end: '2026-04',
-    },
-    {
-      school: 'Royal University Phnom Penh',
-      degree: "Bachelor's degree, Computer Science",
-      start: '2018-08',
-      end: '2022-06',
-    },
-  ],
+    'I am a full-stack software engineer focused on building reliable .NET backends, responsive React applications, and maintainable systems. I write about architecture, APIs, performance, and the practical decisions behind production software.',
+  topSkills: ['.NET', 'React', 'TypeScript', 'APIs', 'Architecture'],
+  experience: [],
+  education: [],
 };
 
 /* ----------------------------------------------------------------------

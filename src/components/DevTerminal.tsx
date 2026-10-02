@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, useTransition } from 'react';
 import { Terminal, Send, RotateCcw, Copy, Check } from 'lucide-react';
-import { profile } from '../content/profile';
 
 interface CommandOutput {
   command: string;
@@ -14,8 +13,8 @@ export default function DevTerminal() {
       command: 'whoami',
       output: (
         <div>
-          <span className="terminal__highlight">{profile.name}</span> — {profile.headline}
-          <div className="terminal__subtext">📍 {profile.location} · 6+ Years Full-Stack Engineering</div>
+          <span className="terminal__highlight">Technical Notes</span> — software engineering
+          <div className="terminal__subtext">Architecture, systems, and practical code</div>
         </div>
       ),
     },
@@ -56,8 +55,8 @@ export default function DevTerminal() {
       case 'whoami':
         output = (
           <div>
-            <p><strong>{profile.name}</strong> ({profile.pronouns ?? 'He/Him'})</p>
-            <p>{profile.about}</p>
+            <p><strong>Technical Notes</strong></p>
+            <p>A neutral collection of practical software notes.</p>
           </div>
         );
         break;
@@ -112,9 +111,9 @@ export default function DevTerminal() {
       case 'contact':
         output = (
           <div className="terminal__output-block">
-            <div>💼 LinkedIn: <a href={profile.linkedInUrl} target="_blank" rel="noreferrer">{profile.linkedInUrl}</a></div>
-            <div>🐙 GitHub: <a href="https://github.com/vicheanath" target="_blank" rel="noreferrer">https://github.com/vicheanath</a></div>
-            <div>📍 Location: {profile.location}</div>
+            <div>Documentation: <span>private</span></div>
+            <div>Source: <span>private</span></div>
+            <div>Location: private</div>
           </div>
         );
         break;
@@ -162,7 +161,7 @@ export default function DevTerminal() {
 
   const handleCopy = () => {
     const text = history.map(h => `$ ${h.command}\n${typeof h.output === 'string' ? h.output : ''}`).join('\n');
-    navigator.clipboard?.writeText(text || 'Vichea Nath - Software Engineer');
+    navigator.clipboard?.writeText(text || 'Technical Notes');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -177,7 +176,7 @@ export default function DevTerminal() {
         </div>
         <div className="dev-terminal__title">
           <Terminal size={14} aria-hidden />
-          <span>vichea@ced-workstation: ~/portfolio</span>
+          <span>notes@workstation: ~/notes</span>
         </div>
         <div className="dev-terminal__actions">
           <button
@@ -227,7 +226,7 @@ export default function DevTerminal() {
           {history.map((item, idx) => (
             <div key={idx} className="dev-terminal__entry">
               <div className="dev-terminal__prompt-line">
-                <span className="dev-terminal__user">vichea</span>
+                <span className="dev-terminal__user">notes</span>
                 <span className="dev-terminal__symbol">➜</span>
                 <span className="dev-terminal__dir">~</span>
                 <span className="dev-terminal__cmd">{item.command}</span>
@@ -239,7 +238,7 @@ export default function DevTerminal() {
         </div>
 
         <form onSubmit={handleSubmit} className="dev-terminal__input-row">
-          <span className="dev-terminal__user" aria-hidden>vichea</span>
+          <span className="dev-terminal__user" aria-hidden>notes</span>
           <span className="dev-terminal__symbol" aria-hidden>➜</span>
           <span className="dev-terminal__dir" aria-hidden>~</span>
           <input

@@ -37,7 +37,7 @@ export default function Post() {
   if (!post) {
     return (
       <article className="article article--missing">
-        <Seo title="Not found — Vichea Nath" path={slug ? `blog/${slug}` : ''} />
+        <Seo title={`Not found — ${SITE_NAME}`} path={slug ? `blog/${slug}` : ''} />
         <div className="article__missing-icon">
           <FileX size={40} aria-hidden />
         </div>
@@ -159,7 +159,7 @@ export default function Post() {
             </span>
             <span className="article__meta-item">
               <NotebookPen size={15} aria-hidden />
-              <span>Original article by {SITE_NAME}</span>
+              <span>Technical note</span>
             </span>
           </div>
           {post.tags.length > 0 && (
@@ -228,7 +228,7 @@ export default function Post() {
 
         <footer className="article__footer">
           <p className="article__byline">
-            Written by {SITE_NAME} · Software Engineer @ CED. Original technical writing based on production .NET and React architecture.
+            Original technical writing based on practical .NET and React architecture.
           </p>
           <div className="article__actions">
             <Link to="/blog" className="article__back-link">

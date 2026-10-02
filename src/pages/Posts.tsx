@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Newspaper, Search, Tags, X, Calendar, Clock3, ArrowRight, Sparkles, BookOpen } from 'lucide-react';
+import { Newspaper, Search, Tags, X, Calendar, Clock3, ArrowRight, BookOpen } from 'lucide-react';
 import gsap from 'gsap';
 import Seo from '../components/Seo';
 import PostList from '../components/PostList';
@@ -89,7 +89,6 @@ export default function Posts() {
       {!term && !selectedTag && featuredPost && (
         <div className="blog-featured-card">
           <div className="blog-featured-card__badge">
-            <Sparkles size={13} aria-hidden />
             <span>Featured Bulletin</span>
           </div>
           <div className="blog-featured-card__meta">
@@ -129,7 +128,7 @@ export default function Posts() {
       )}
 
       {/* Filter and Search Bar */}
-      <div className="filter-bar">
+      <div className="filter-bar" aria-label="Blog filters">
         <div className="filter-bar__search">
           <Search size={16} aria-hidden />
           <input
@@ -195,6 +194,11 @@ export default function Posts() {
           </button>
         </div>
       )}
+
+      <div className="blog-page__results-heading">
+        <h2>{term || selectedTag ? 'Matching bulletins' : 'All bulletins'}</h2>
+        <span>{filtered.length} {filtered.length === 1 ? 'result' : 'results'}</span>
+      </div>
 
       <PostList
         posts={filtered}

@@ -7,7 +7,7 @@ export default function PublishingPolicy() {
     <section className="page">
       <Seo
         title={`Publishing Policy - ${SITE_NAME}`}
-        description="How content is selected, written, corrected, and disclosed on vicheanath.github.io."
+        description="How content is selected, written, and corrected on this site."
         path="publishing-policy"
         jsonLd={{
           '@context': 'https://schema.org',

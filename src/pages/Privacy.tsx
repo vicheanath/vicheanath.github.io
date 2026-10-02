@@ -7,7 +7,7 @@ export default function Privacy() {
     <section className="page">
       <Seo
         title={`Privacy Policy - ${SITE_NAME}`}
-        description="Privacy policy for vicheanath.github.io: what is collected, what is not, and how to get in touch."
+        description="Privacy policy for this technical notes site."
         path="privacy"
         jsonLd={{
           '@context': 'https://schema.org',
@@ -56,7 +56,7 @@ export default function Privacy() {
       <section className="page__section">
         <h2>External links</h2>
         <p>
-          Articles and project pages may link to GitHub, LinkedIn, official documentation, or other
+          Articles and project pages may link to official documentation or other
           third-party sites. Those websites have their own privacy practices, and this site is not
           responsible for their content or policies.
         </p>
