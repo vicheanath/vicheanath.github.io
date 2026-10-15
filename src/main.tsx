@@ -12,8 +12,9 @@ const app = (
 )
 
 // Production HTML is prerendered (scripts/prerender.js), so hydrate it.
-// `vite dev` serves an empty shell, so fall back to a client render there.
-if (container.hasChildNodes()) {
+// `vite dev` serves an empty shell (only the `<!--app-html-->` placeholder
+// comment), so fall back to a client render there.
+if (container.firstElementChild) {
   hydrateRoot(container, app)
 } else {
   createRoot(container).render(app)

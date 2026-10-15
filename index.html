@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)" />
+    <script>
+      // Apply a saved theme before first paint so prerendered pages don't flash.
+      // Keep in sync with src/lib/theme.ts.
+      try {
+        var theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+          var color = theme === 'dark' ? '#111110' : '#ffffff';
+          document.querySelectorAll('meta[name="theme-color"]').forEach(function (meta) {
+            meta.setAttribute('content', color);
+          });
+        }
+      } catch (e) {}
+    </script>
     <!--app-head-start--><title>Vichea Nath — Technical Notes</title><!--app-head-end-->
   </head>
   <body>

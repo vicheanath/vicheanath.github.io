@@ -35,7 +35,9 @@ export default function Layout() {
       gsap.fromTo(
         mainContentRef.current,
         { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }
+        // clearProps: a leftover transform would turn <main> into the containing
+        // block for position: fixed children (e.g. the reading progress bar).
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', clearProps: 'transform,opacity' }
       );
     }, mainContentRef);
 

@@ -44,7 +44,9 @@ const headPattern = new RegExp(`${HEAD_START}[\\s\\S]*?${HEAD_END}`);
 const { render } = await import(pathToFileURL(serverEntry).href);
 
 function buildPage({ html, head }) {
-  return template.replace(headPattern, head).replace(APP_HTML, html);
+  // Replacer functions, not strings: in a replacement string `$&` means "the
+  // matched text", and React escapes C#'s `$"` as `$&quot;`.
+  return template.replace(headPattern, () => head).replace(APP_HTML, () => html);
 }
 
 function writePage(routePath, contents) {

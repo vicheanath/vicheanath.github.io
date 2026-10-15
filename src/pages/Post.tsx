@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { isValidElement, memo, useState, useEffect, type ReactNode } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ArrowLeft, CalendarDays, Clock3, FileX, NotebookPen, Tag as TagIcon, Share2, Check, ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
@@ -14,6 +14,47 @@ import {
   getReadingTimeMinutes,
 } from '../lib/posts';
 import { SITE_NAME, canonicalUrl } from '../lib/site';
+
+const remarkPlugins = [remarkGfm];
+
+// Defined once at module scope: an inline object would give react-markdown new
+// component types on every render, remounting every diagram and code block.
+const markdownComponents: Components = {
+  // Fenced blocks arrive as <pre><code>. Replace the whole <pre> so the
+  // diagram/code figure is not nested inside it (and inheriting its styles).
+  pre({ children }) {
+    if (!isValidElement<{ className?: string; children?: ReactNode }>(children)) {
+      return <pre>{children}</pre>;
+    }
+
+    const { className, children: code } = children.props;
+    const source = String(code).replace(/\n$/, '');
+    const language = /language-(\w+)/.exec(className ?? '')?.[1]?.toLowerCase() ?? 'text';
+
+    if (language === 'mermaid') {
+      return <MermaidDiagram chart={source} />;
+    }
+
+    return <CodeBlock language={language} source={source} />;
+  },
+  // Wide tables scroll on their own instead of overflowing the page.
+  table({ children }) {
+    return (
+      <div className="article__table-wrap">
+        <table>{children}</table>
+      </div>
+    );
+  },
+};
+
+// Memoized so scroll-driven re-renders of the page don't re-parse the markdown.
+const ArticleMarkdown = memo(function ArticleMarkdown({ body }: { body: string }) {
+  return (
+    <ReactMarkdown remarkPlugins={remarkPlugins} components={markdownComponents}>
+      {body}
+    </ReactMarkdown>
+  );
+});
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
@@ -175,33 +216,7 @@ export default function Post() {
         </header>
 
         <div className="article__body">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code({ className, children, ...props }) {
-                const source = String(children).replace(/\n$/, '');
-                const match = /language-(\w+)/.exec(className || '');
-                const language = match?.[1]?.toLowerCase() ?? 'text';
-                const isBlock = match != null || source.includes('\n');
-
-                if (language === 'mermaid') {
-                  return <MermaidDiagram key={source} chart={source} />;
-                }
-
-                if (isBlock) {
-                  return <CodeBlock language={language} source={source} />;
-                }
-
-                return (
-                  <code className={className ?? ''} {...props}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-          >
-            {post.body}
-          </ReactMarkdown>
+          <ArticleMarkdown body={post.body} />
         </div>
 
         {/* Related Posts */}

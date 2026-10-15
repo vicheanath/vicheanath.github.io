@@ -1,12 +1,35 @@
 import { useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Check, Copy } from 'lucide-react';
 
 interface CodeBlockProps {
   language: string;
   source: string;
 }
+
+const LANGUAGE_LABELS: Record<string, string> = {
+  bash: 'Bash',
+  cs: 'C#',
+  csharp: 'C#',
+  css: 'CSS',
+  html: 'HTML',
+  js: 'JavaScript',
+  javascript: 'JavaScript',
+  json: 'JSON',
+  jsx: 'JSX',
+  md: 'Markdown',
+  powershell: 'PowerShell',
+  sh: 'Shell',
+  shell: 'Shell',
+  sql: 'SQL',
+  text: 'Plain text',
+  ts: 'TypeScript',
+  tsx: 'TSX',
+  typescript: 'TypeScript',
+  xml: 'XML',
+  yaml: 'YAML',
+  yml: 'YAML',
+};
 
 /**
  * Highlighted code with a copy control. The markup is fully rendered at build
@@ -33,7 +56,7 @@ export default function CodeBlock({ language, source }: CodeBlockProps) {
   return (
     <figure className="article__code-block">
       <div className="article__code-head">
-        <figcaption className="article__code-label">{language}</figcaption>
+        <figcaption className="article__code-label">{LANGUAGE_LABELS[language] ?? language}</figcaption>
         <button
           type="button"
           className="article__code-copy"
@@ -45,25 +68,19 @@ export default function CodeBlock({ language, source }: CodeBlockProps) {
           <span>{copied ? 'Copied' : 'Copy'}</span>
         </button>
       </div>
-      <div className="article__code-surface">
+      <div className="article__code-surface" tabIndex={0} role="region" aria-label={`${LANGUAGE_LABELS[language] ?? language} code`}>
+        {/* Token colors come from CSS variables (index.css) so they follow the theme. */}
         <SyntaxHighlighter
-          style={oneDark}
+          useInlineStyles={false}
           language={language === 'text' ? undefined : language}
           PreTag="div"
-          customStyle={{
-            margin: 0,
-            padding: '1rem 1.1rem',
-            borderRadius: 0,
-            border: 'none',
-            background: 'transparent',
-          }}
+          customStyle={{ margin: 0, padding: '1.1rem 1.25rem' }}
           codeTagProps={{
+            className: 'article__code',
             style: {
               display: 'block',
-              fontSize: '0.92rem',
-              lineHeight: 1.65,
-              padding: 0,
               minWidth: 'max-content',
+              whiteSpace: 'pre',
             },
           }}
           showLineNumbers={false}

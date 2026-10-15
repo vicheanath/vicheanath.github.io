@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Home, CircleUserRound, FolderGit2, Newspaper, Mail, Search, Menu, X, Terminal } from 'lucide-react';
+import { Home, CircleUserRound, FolderGit2, Newspaper, Mail, Search, Menu, X, Terminal, Sun, Moon } from 'lucide-react';
 import gsap from 'gsap';
 import { profile } from '../content/profile';
+import { setTheme, useTheme } from '../lib/theme';
 
 interface NavbarProps {
   onOpenCommandPalette: () => void;
@@ -13,6 +14,8 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
+  const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
   const isBlogActive =
     location.pathname.startsWith('/blog') ||
@@ -86,7 +89,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
           </NavLink>
         </nav>
 
-        {/* Actions (Cmd+K + Mobile Toggle) */}
+        {/* Actions (Cmd+K + Theme + Mobile Toggle) */}
         <div className="site-nav__actions">
           <button
             type="button"
@@ -98,6 +101,16 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
             <Search size={14} aria-hidden />
             <span className="site-nav__cmd-text">Search...</span>
             <kbd className="site-nav__kbd">&#8984;K</kbd>
+          </button>
+
+          <button
+            type="button"
+            className="site-nav__theme"
+            onClick={() => setTheme(nextTheme)}
+            aria-label={`Switch to ${nextTheme} mode`}
+            title={`Switch to ${nextTheme} mode`}
+          >
+            {theme === 'dark' ? <Sun size={16} aria-hidden /> : <Moon size={16} aria-hidden />}
           </button>
 
           <button
